@@ -17,6 +17,7 @@
   <a href="https://evoke-world.github.io/Evoke/"><img src="https://img.shields.io/badge/🌐_Project_Page-evoke--world.github.io-1a73e8.svg" alt="Project Page"></a>
   <a href="https://arxiv.org/abs/2608.13546"><img src="https://img.shields.io/badge/arXiv-2608.13546-b31b1b.svg" alt="arXiv"></a>
   <a href="https://huggingface.co/AlayaLab/Evoke"><img src="https://img.shields.io/badge/🤗_Weights-AlayaLab/Evoke-ffce1c.svg" alt="Weights"></a>
+  <a href="https://huggingface.co/AlayaLab/Evoke-Turbo"><img src="https://img.shields.io/badge/🤗_Weights-Evoke--Turbo-ffce1c.svg" alt="Evoke-Turbo Weights"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
 </p>
 
@@ -42,6 +43,9 @@
 
 ## 📰 Latest News
 
+- **2026-09-11 — Evoke-Turbo released.** Our updated model achieves **state of the art on WBench**
+  with an average score of **82.0**, improving navigation, consistency, and physical plausibility.
+  [🤗 Download Evoke-Turbo](https://huggingface.co/AlayaLab/Evoke-Turbo) · [WBench results](#-wbench-results)
 - **2026-08-30 — Director Web UI.** EVOKE now ships with a local Web UI for per-chunk prompting,
   dual-stick camera control, streaming previews, continuation, and revision branching. See the
   [UI guide and interface preview](ui/README.md).
@@ -151,6 +155,20 @@ Two things `pip` will not do: `diffusers` is pinned to a **development fork that
 `PATH`. Both depth backends (ViGeo, Depth-Anything-3) are **vendored** under
 `evoke/third_party/`, so only their weights are downloaded — see [Weights](#-weights).
 
+## 🏆 WBench Results
+
+Evoke-Turbo improves the WBench average from **80.8210** to **82.0** while retaining the same
+**3-step, CFG-free** inference workflow.
+
+| Model | Video Quality | Setting | Navigation | Consistency | Physical | Avg |
+|---|---:|---:|---:|---:|---:|---:|
+| [Evoke](https://huggingface.co/AlayaLab/Evoke) | **82.7900** | **83.7600** | 78.6300 | 86.8700 | 72.0550 | 80.8210 |
+| [Evoke-Turbo](https://huggingface.co/AlayaLab/Evoke-Turbo) | 81.8914 | 82.0518 | **83.8978** | **88.1469** | **74.0133** | **82.0** |
+
+Results on [WBench](https://meituan-longcat.github.io/WBench/) (158 cases; Interaction: Navigation only).
+**Bold** marks the best score among the two models in each column. See the
+[model card](https://huggingface.co/AlayaLab/Evoke-Turbo#wbench) for evaluation setup and score provenance.
+
 ## 📦 Weights
 
 Everything goes under `models/` (gitignored). Every released EVOKE directory is the **parent** of a
@@ -177,6 +195,16 @@ hf download AlayaLab/Evoke --local-dir models
 # ViGeo -- REQUIRED. The depth backend behind the world state bank; every shipped
 # recipe uses it (DEPTH_BACKEND=vigeo, cloud_warp.backend: vigeo).
 hf download pkqbajng/ViGeo --local-dir models/ViGeo1.1
+```
+
+For **[Evoke-Turbo](https://huggingface.co/AlayaLab/Evoke-Turbo)**, download the updated transformer
+weights and select them with `TRANSFORMER_PATH`. It shares EVOKE's base components and depth backend:
+
+```bash
+hf download AlayaLab/Evoke-Turbo --local-dir models/evoke-turbo/transformer
+
+TRANSFORMER_PATH=models/evoke-turbo MODE=i2v NUM_CHUNKS=20 \
+  bash scripts/inference/infer_post_distill.sh
 ```
 
 **Depth-Anything-3 is optional** — nothing in the default path touches it, and you only need it if you
