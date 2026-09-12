@@ -10,7 +10,7 @@ Scene selection, generation settings, and adjustable movement and camera rotatio
 
 Live prompt: **A dragon appeared on the surface of the lake.**
 
-[![A dragon above the lake after a live prompt update](ui/assets/dragon-example.png)](ui/assets/world-explorer-live.png)
+![EVOKE Interactive UI showing a dragon above the lake and the live prompt controls](ui/assets/dragon-example.png)
 
 ## Features
 
