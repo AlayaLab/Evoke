@@ -43,7 +43,7 @@
 
 ## 📰 Latest News
 
-- **2026-09-12 — Interactive UI and inference optimizations.** We release an interactive world-exploration UI that generates **1.5-second video chunks in 1.34 seconds on average** on **five H200 GPUs**, at **640×384 resolution and 24 FPS**. [UI guide and interface preview](InteractiveUI/README.md#interface-preview).
+- **2026-09-12 — Interactive UI and inference optimizations.** We release an interactive world-exploration UI that generates **1.5-second video chunks in 1.34 seconds on average** on **five H200 GPUs**, at **640×384 resolution**. [UI guide and interface preview](InteractiveUI/README.md#interface-preview).
 - **2026-09-11 — Evoke-Turbo released.** Our updated model achieves **state of the art on WBench**
   with an average score of **82.0**, improving navigation, consistency, and physical plausibility.
   [🤗 Download Evoke-Turbo](https://huggingface.co/AlayaLab/Evoke-Turbo) · [WBench results](#-wbench-results)
