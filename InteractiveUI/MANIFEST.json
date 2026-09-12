@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3964,
-      "sha256": "1b3c075773d500e6b3e600e77c4122d4385e1a725481d9d38a9e2a5622efacf6"
+      "bytes": 4527,
+      "sha256": "8efce5d38dbd793c7cadc622868ee8ccf25ca0b6e93834ee6af061f3e28dadbc"
     },
     {
       "path": "RELEASE_NOTE.md",
@@ -1299,6 +1299,16 @@
       "path": "ui/app.py",
       "bytes": 60285,
       "sha256": "7676e34eb5c39151f03a63dee3a49f75a63e16fa296097902b3cdce77dd510b7"
+    },
+    {
+      "path": "ui/assets/world-explorer-live.png",
+      "bytes": 322880,
+      "sha256": "5464868ec3891d3caddfd9624e4bc714855c9ed765fc601d2a96535c589cce9f"
+    },
+    {
+      "path": "ui/assets/world-explorer-setup.png",
+      "bytes": 385308,
+      "sha256": "56eab29e75a6a007e669d1bc6bc4685726854a8746ef0a70d2cc9051bf573eb6"
     },
     {
       "path": "ui/camera_diagnostics.py",
