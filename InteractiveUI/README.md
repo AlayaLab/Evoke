@@ -10,9 +10,7 @@ Scene selection, generation settings, and adjustable movement and camera rotatio
 
 Live exploration with keyboard controls and the prompt event panel:
 
-![EVOKE Interactive UI during live exploration, showing keyboard navigation and the prompt event panel](ui/assets/world-explorer-live.png)
-
-These screenshots were captured from the English interface during layout checks and a live inference test.
+![EVOKE Interactive UI showing a dragon above the lake after a live prompt update](ui/assets/world-explorer-live.png)
 
 ## Features
 

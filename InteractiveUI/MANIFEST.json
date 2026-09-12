@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4532,
-      "sha256": "71923b0879637b3f434e1ce740db78a470189968b328a608dc88924f19aec67b"
+      "bytes": 4403,
+      "sha256": "21fc2532c256f6d8142dd7b441eaea78286cb70cff4c637d67833a8d997352c1"
     },
     {
       "path": "RELEASE_NOTE.md",
@@ -1302,13 +1302,13 @@
     },
     {
       "path": "ui/assets/world-explorer-live.png",
-      "bytes": 322101,
-      "sha256": "2c512fe3e214fb45181c369ef7318844f7ededbbe6c165ce346470dc7e1bccee"
+      "bytes": 539921,
+      "sha256": "d4517a1fe4617a47062dc6f6d59b0874ca3b55f2e2f1969c9b181027ac28e80c"
     },
     {
       "path": "ui/assets/world-explorer-setup.png",
-      "bytes": 384863,
-      "sha256": "d8398622a907a3ef34409eb8ee8c22107122da18be45e68d0739be830d5dad30"
+      "bytes": 691725,
+      "sha256": "794fcb47ec1217dcb7cc7c736384582624822e2ed5ee0ea1d4bd1e0907bc0bbe"
     },
     {
       "path": "ui/camera_diagnostics.py",
@@ -1478,12 +1478,12 @@
     {
       "path": "ui/static/player.html",
       "bytes": 8004,
-      "sha256": "fe5be71c68b19ac9fe9d128b7969d46f29b5d23ca7788dd2cd5daa41ff0df14d"
+      "sha256": "1916957cd0e08d254672683f42e50fce5229f557e3244c541b8df318e4305e27"
     },
     {
       "path": "ui/static/player.js",
-      "bytes": 30336,
-      "sha256": "37cff0eadde0c30a3cbefb2a731fc121c8d0b07a1ba57b454473aede67c074be"
+      "bytes": 30479,
+      "sha256": "b8531ede668bc0dcfbe4426c1b5ef8bb590f5bad68d197f71b7d72510425d06e"
     },
     {
       "path": "ui/static/styles.css",
