@@ -53,8 +53,8 @@ def install(app, backend):
     root=Path(os.environ.get('EVOKE_PLAYER_DATA', str(backend.REPO_ROOT/'.player-data')))/'live'
 
     references = {
-        'meteor': '山间湖泊', 'aurora': '冰原旷野',
-        'gateway': '星际之门', 'crystalstorm': '晶体风暴',
+        'meteor': 'Alpine Lake', 'aurora': 'Ice Fields',
+        'gateway': 'Stargate', 'crystalstorm': 'Crystal Storm',
     }
 
     @app.get('/api/live/references')
@@ -71,11 +71,11 @@ def install(app, backend):
     @app.get('/api/live/references/{name}/image')
     async def reference_image(name: str):
         if name not in references:
-            raise HTTPException(404, '参考图不存在')
+            raise HTTPException(404, 'Reference image not found')
         return FileResponse(backend.REPO_ROOT/'examples/segment_prompts'/f'{name}.jpg', media_type='image/jpeg')
 
     def get(sid):
-        if sid not in sessions:raise HTTPException(404,'探索会话不存在或已结束，请重新进入世界')
+        if sid not in sessions:raise HTTPException(404,'Exploration session not found or ended. Please re-enter the world.')
         return sessions[sid]
 
     def snapshot(session):
@@ -83,27 +83,27 @@ def install(app, backend):
         job=backend.JOBS.get(session.job_id)
         if job and job.status in {'failed','cancelled'}:
             result.update(phase='error',message=job.message)
-        elif job and job.status=='queued':result.update(phase='queued',message='正在等待可用 GPU')
+        elif job and job.status=='queued':result.update(phase='queued',message='Waiting for an available GPU')
         return {**result,'sessionId':session.id,'jobId':session.job_id,
                 'vaePrecision':session.vae_precision,'playbackMode':session.playback_mode,'playedFrame':session.state['playedFrame'],'inputSequence':session.state['sequence'],'inputKeys':session.state['keys'],
                 'promptRequest':session.prompt_request,'playbackSettings':session.playback}
 
     @app.post('/api/live/sessions')
     async def start(reference: UploadFile=File(...), prompt: str=Form(...), quality: str=Form('quality'), latent_window: int | None=Form(None), vae_precision: str=Form('fp32'), playback_mode: str=Form('legacy'), warmup_chunks: int=Form(0), ahead_chunks: int | None=Form(None)):
-        if not prompt.strip():raise HTTPException(400,'请填写场景描述')
-        if quality == 'fast':raise HTTPException(400,'低分辨率模式已停用，请刷新网页；所有模式均使用原生 640×384')
-        if quality == 'responsive':raise HTTPException(400,'短窗口模式已停用，请刷新网页；使用训练时的 9 latent 窗口')
-        if quality != 'quality':raise HTTPException(400,'无效交互模式')
-        if latent_window not in (None,9):raise HTTPException(400,'生成窗口固定为训练配置 9 latent，不支持缩短')
-        if vae_precision not in {'fp32','fp16_mixed'}:raise HTTPException(400,'无效 VAE 精度，请选择 FP32 或 FP16 混合精度')
-        if playback_mode not in {'legacy','continuous'}:raise HTTPException(400,'无效播放模式')
+        if not prompt.strip():raise HTTPException(400,'Please enter a scene description')
+        if quality == 'fast':raise HTTPException(400,'Low-resolution mode is no longer available. Please refresh the page. All modes use native 640×384 resolution.')
+        if quality == 'responsive':raise HTTPException(400,'Short-window mode is no longer available. Please refresh the page. The window uses 9 latent frames, as in training.')
+        if quality != 'quality':raise HTTPException(400,'Invalid interaction mode')
+        if latent_window not in (None,9):raise HTTPException(400,'The generation window is fixed at 9 latent frames to match training and cannot be shortened.')
+        if vae_precision not in {'fp32','fp16_mixed'}:raise HTTPException(400,'Invalid VAE precision. Please select FP32 or mixed FP16.')
+        if playback_mode not in {'legacy','continuous'}:raise HTTPException(400,'Invalid playback mode')
         try:playback=playback_settings(warmup_chunks,ahead_chunks)
         except ValueError as error:raise HTTPException(400,str(error))
         if playback_mode!='continuous' and (warmup_chunks or ahead_chunks is not None):
-            raise HTTPException(400,'隐藏预热和提前生成设置需要连续播放模式')
+            raise HTTPException(400,'Hidden warmup and generation-ahead settings require continuous playback mode.')
         latent_window=9
         health=await backend.health()
-        if not health['ready']:raise HTTPException(503,'GPU 模型尚未就绪')
+        if not health['ready']:raise HTTPException(503,'GPU models are not ready yet')
         sid=uuid.uuid4().hex;directory=root/sid;directory.mkdir(parents=True)
         session=Session(sid,directory,vae_precision=vae_precision,playback_mode=playback_mode,playback=playback,initial_prompt=prompt.strip());session.save();sessions[sid]=session
         try:
@@ -128,30 +128,30 @@ def install(app, backend):
         session=get(sid)
         raw=bytearray()
         async for block in request.stream():
-            if len(raw)+len(block)>16384:raise HTTPException(413,'事件描述请求过大')
+            if len(raw)+len(block)>16384:raise HTTPException(413,'Event prompt request is too large')
             raw.extend(block)
         try:
             message=json.loads(raw)
         except (ValueError,UnicodeError):
-            raise HTTPException(400,'事件描述请求必须为 JSON 对象')
-        if not isinstance(message,dict):raise HTTPException(400,'事件描述请求必须为 JSON 对象')
+            raise HTTPException(400,'Event prompt request must be a JSON object')
+        if not isinstance(message,dict):raise HTTPException(400,'Event prompt request must be a JSON object')
         text=message.get('prompt')
         mode=message.get('mode','event')
         request_id=message.get('requestId')
         if not isinstance(text,str) or not text.strip() or len(text)>2000:
-            raise HTTPException(400,'事件描述须为 1 至 2000 字符的非空文本')
-        if mode not in ('event','replace'):raise HTTPException(400,'无效事件描述模式')
+            raise HTTPException(400,'Event prompt must be nonempty text between 1 and 2000 characters.')
+        if mode not in ('event','replace'):raise HTTPException(400,'Invalid event prompt mode')
         if not isinstance(request_id,str) or not request_id.strip() or len(request_id)>64:
-            raise HTTPException(400,'requestId 须为 1 至 64 字符的非空文本')
+            raise HTTPException(400,'requestId must be nonempty text between 1 and 64 characters.')
         state=read_json(session.root/'state.json')
         job=backend.JOBS.get(session.job_id)
         if (session.state['stop'] or state.get('phase') in {'stopped','error','failed','cancelled'}
                 or (job and job.status in {'failed','cancelled','complete','cancelling'})):
-            raise HTTPException(409,'探索会话已结束，请重新进入世界')
+            raise HTTPException(409,'Exploration session has ended. Please re-enter the world.')
         previous=session.prompt_requests.get(request_id)
         if previous is not None:
             if previous['text']!=text or previous['mode']!=mode:
-                raise HTTPException(409,'同一 requestId 不可用于不同事件描述')
+                raise HTTPException(409,'The same requestId cannot be used for different event prompts.')
             return previous
         revision=(session.prompt_request or {}).get('revision',0)+1
         prompt=text.strip() if mode=='replace' else session.initial_prompt+'\n\nCurrent event: '+text.strip()
@@ -170,7 +170,7 @@ def install(app, backend):
         session=get(sid);session.state.update(stop=True,keys=[],paused=True);session.save()
         job=backend.JOBS.get(session.job_id)
         if job and job.status=='queued':
-            job.status='cancelled';job.message='探索已结束';backend._persist_job(job)
+            job.status='cancelled';job.message='Exploration ended';backend._persist_job(job)
         return {'stopping':True}
 
     def playback_ack(session, message):
@@ -192,7 +192,7 @@ def install(app, backend):
 
         if not os.environ.get('EVOKE_FRAME_SOCKET') and get(sid).playback_mode!='continuous':raise HTTPException(404)
         session=get(sid)
-        if session.connected or session.state['stop']:raise HTTPException(409,'会话已连接或结束')
+        if session.connected or session.state['stop']:raise HTTPException(409,'Session is already connected or has ended')
         raw=await request.body()
         if len(raw)>4096:raise HTTPException(413)
         try:
@@ -340,7 +340,7 @@ def install(app, backend):
                     continue
                 phase=state.get('phase')
                 if phase=='error':
-                    if continuous:yield event('error',{'message':state.get('message','生成已中断'),'lastFrame':sent})
+                    if continuous:yield event('error',{'message':state.get('message','Generation interrupted'),'lastFrame':sent})
                     return
                 if phase=='stopped':
 

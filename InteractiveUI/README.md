@@ -1,6 +1,6 @@
 # Interactive UI
 
-An interactive world-exploration interface with camera controls, live prompt switching, hidden scene warmup, and optimized EVOKE inference.
+An English-language world-exploration interface with camera controls, live prompt switching, hidden scene warmup, and optimized EVOKE inference.
 
 ## Interface preview
 
@@ -12,7 +12,7 @@ Live exploration with keyboard controls and the prompt event panel:
 
 ![EVOKE Interactive UI during live exploration, showing keyboard navigation and the prompt event panel](ui/assets/world-explorer-live.png)
 
-These screenshots were captured from the final interface during layout checks and an inference smoke test.
+These screenshots were captured from the English interface during layout checks and a live inference test.
 
 ## Features
 

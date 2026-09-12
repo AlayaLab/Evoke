@@ -52,7 +52,7 @@ def start(slot):
                 live=Path(argv[argv.index('--live_control_path')+1])
                 if live.resolve().is_relative_to((DATA/'live').resolve()):
                     state=json.loads((live/'state.json').read_text())
-                    state.update(phase='error',message='推理进程重启，请重新进入世界',updatedAt=time.time())
+                    state.update(phase='error',message='The inference worker restarted. Please re-enter the world.',updatedAt=time.time())
                     atomic(live/'state.json',state)
                     atomic(live/'finished.json',{'error':'SP worker group restarted','finishedAt':time.time()})
         except (OSError,ValueError,KeyError,IndexError):pass

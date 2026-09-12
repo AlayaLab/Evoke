@@ -273,11 +273,11 @@ function renderPrompts() {
     const extending = state.continuationBaseChunks > 0 && state.chunks > state.continuationBaseChunks;
     const retained = extending && index < state.continuationBaseChunks;
     $(".prompt-copy label", card).textContent = retained
-      ? `第 ${index + 1} 段 · 已保留`
-      : extending ? `第 ${index + 1} 段 · 续写描述` : index ? `第 ${index + 1} 段画面描述` : "建立世界与主体";
+      ? `Chunk ${index + 1} · Retained`
+      : extending ? `Chunk ${index + 1} · Continuation prompt` : index ? `Chunk ${index + 1} prompt` : "Set the scene and subject";
     const textarea = $("textarea", card);
     textarea.value = existing[index] ?? promptExamples[index] ?? "";
-    textarea.placeholder = index ? "描述这一段希望发生的变化…" : "描述起始场景、主体、光线与风格…";
+    textarea.placeholder = index ? "Describe what should change in this chunk…" : "Describe the opening scene, subject, lighting, and style…";
     textarea.disabled = retained;
     card.classList.toggle("retained", retained);
     const count = $(".char-count", card);
@@ -295,17 +295,17 @@ function renderPrompts() {
 
 function updateTimeline() {
   $("#chunkCount").textContent = state.chunks;
-  $("#totalDuration").textContent = `${(state.chunks * 1.5).toFixed(1)} 秒`;
+  $("#totalDuration").textContent = `${(state.chunks * 1.5).toFixed(1)} s`;
   const appended = Math.max(0, state.chunks - state.continuationBaseChunks);
   $("#coverageDuration").textContent = state.continuationBaseChunks && appended
-    ? `续写 ${(appended * 1.5).toFixed(1)}S`
+    ? `EXTEND ${(appended * 1.5).toFixed(1)}S`
     : `${(state.chunks * 1.5).toFixed(1)}S`;
   $("#moveDrawHelp").textContent = state.continuationBaseChunks && appended
-    ? `此轨迹从 CH ${String(state.continuationBaseChunks).padStart(2, "0")} 片尾继续，仅控制新增段`
-    : "拖动绘制移动轨迹";
+    ? `Continue from CH ${String(state.continuationBaseChunks).padStart(2, "0")}; applies to new chunks only`
+    : "Drag to draw a movement path";
   $("#lookDrawHelp").textContent = state.continuationBaseChunks && appended
-    ? "从当前镜头方向继续，仅控制新增段"
-    : "从中心拖动视角轨迹";
+    ? "Continue from the current view; applies to new chunks only"
+    : "Drag from the center to draw a look path";
   $("#frameCount").textContent = String(36 * state.chunks - 3);
   $("#progressFraction").textContent = `${state.segmentCount} / ${state.chunks}`;
   const ruler = $("#timelineRuler");
@@ -357,8 +357,8 @@ function updateGenerateAction() {
     button.disabled = Boolean(completeWithoutExtension);
   }
   $("span", button).textContent = extending
-    ? `续写 CH ${String(state.continuationBaseChunks + 1).padStart(2, "0")}–${String(state.chunks).padStart(2, "0")}`
-    : completeWithoutExtension ? "点击 + 增加 CHUNK 后续写" : "开始流式生成";
+    ? `Extend CH ${String(state.continuationBaseChunks + 1).padStart(2, "0")}–${String(state.chunks).padStart(2, "0")}`
+    : completeWithoutExtension ? "Click + to add chunks and continue" : "Start generation";
 }
 
 function selectOutput(url, key, pin = false) {
@@ -538,7 +538,7 @@ function updateRetryButton() {
   const selected = Number(state.selectedSegment);
   const isChunk = state.selectedSegment !== null && state.selectedSegment !== "full" && Number.isInteger(selected);
   button.disabled = state.jobStatus !== "complete" || !isChunk;
-  button.textContent = isChunk ? `从 CH ${String(selected + 1).padStart(2, "0")} 起重做` : "从此段重做";
+  button.textContent = isChunk ? `Regenerate from CH ${String(selected + 1).padStart(2, "0")}` : "Regenerate from here";
 }
 
 function updateFullDownloadMenu() {
@@ -561,7 +561,7 @@ function addOutputChoice(stream, url, key, label) {
   item.dataset.segment = String(key);
   item.tabIndex = 0;
   item.setAttribute("role", "button");
-  item.setAttribute("aria-label", `查看 ${label}`);
+  item.setAttribute("aria-label", `View ${label}`);
   item.innerHTML = `<video src="${url}#t=0.01" muted loop playsinline preload="metadata"></video><span>${label}</span>`;
   item.addEventListener("mouseenter", () => $("video", item).play().catch(() => {}));
   item.addEventListener("mouseleave", () => $("video", item).pause());
@@ -583,8 +583,8 @@ function addPlaylistChoice(stream, count) {
     item.dataset.segment = "full";
     item.tabIndex = 0;
     item.setAttribute("role", "button");
-    item.setAttribute("aria-label", "连续播放全部 chunk");
-    item.innerHTML = '<div class="playlist-thumb"><b>▶</b><small></small></div><span>FULL · 连播</span>';
+    item.setAttribute("aria-label", "Play all chunks in sequence");
+    item.innerHTML = '<div class="playlist-thumb"><b>▶</b><small></small></div><span>FULL · PLAY ALL</span>';
     const activate = () => selectFullPlaylist(state.segmentUrls, true);
     item.addEventListener("click", activate);
     item.addEventListener("keydown", event => {
@@ -627,7 +627,7 @@ function showSnapshot(snapshot) {
     ? ` · ${Math.max(0, Date.now() / 1000 - Number(detail.updatedAt)).toFixed(1)}s`
     : "";
   $("#progressMessage").textContent = complete
-    ? "全部 chunk 已生成 · FULL 逐段连播 · 三点菜单按需合并下载"
+    ? "All chunks complete · Select FULL to play all · Use the menu to download the full video"
     : `${snapshot.message || status}${phaseElapsed}`;
   $("#progressBar").style.width = `${complete ? 100 : Math.round((snapshot.progress || 0) * 100)}%`;
   const phaseOrder = ["geometry", "denoising", "decoding", "chunk_done"];
@@ -640,8 +640,8 @@ function showSnapshot(snapshot) {
   if (detail && !snapshot.segments?.length) {
     $("#monitorEmpty strong").textContent = detail.message;
     $("#monitorEmpty span").textContent = detail.phase === "decoding"
-      ? "解码完成后将立即播放当前 chunk"
-      : "首个 chunk 内部进度正在实时更新";
+      ? "This chunk will play as soon as decoding finishes"
+      : "Showing live progress for the first chunk";
   }
   $("#jobLog").textContent = (snapshot.log || []).join("\n") || "Waiting for worker";
   $("#jobLog").scrollTop = $("#jobLog").scrollHeight;
@@ -667,7 +667,7 @@ function showSnapshot(snapshot) {
   const ancestry = snapshot.parentRevisionId ? ` ← ${snapshot.parentRevisionId}` : "";
   $("#revisionLabel").textContent = snapshot.projectId && snapshot.revisionId
     ? `${snapshot.projectId} · ${snapshot.revisionId}${ancestry} · ${(snapshot.mode || "i2v").toUpperCase()}`
-    : "旧版结果 · 首次重做时自动归档";
+    : "Legacy result · Archived automatically on first regeneration";
   if (complete && snapshot.chunks > state.continuationBaseChunks) {
     state.continuationBaseChunks = snapshot.chunks;
     renderPrompts();
@@ -696,7 +696,7 @@ function monitorJob(payload) {
   state.eventSource.onerror = () => {
     if (state.eventSource) {
       state.eventSource.close(); state.eventSource = null;
-      $("#formError").textContent = "实时状态流已切换为轮询更新。";
+      $("#formError").textContent = "Live status switched to periodic updates.";
     }
   };
 }
@@ -725,11 +725,11 @@ function showHealth(health) {
     $("#gpuStatus").textContent = "GPU READY";
     const total = (device.totalMemoryMiB / 1024).toFixed(1);
     const free = (device.freeMemoryMiB / 1024).toFixed(1);
-    $("#gpuDetail").textContent = `${device.name} · ${total}GB · 空闲 ${free}GB${gpu.capacityReady ? "" : " · 显存风险"}`;
+    $("#gpuDetail").textContent = `${device.name} · ${total}GB · ${free}GB free${gpu.capacityReady ? "" : " · Low GPU memory"}`;
   } else {
     gpuCheck.className = "runtime-check error";
     $("#gpuStatus").textContent = "GPU NOT FOUND";
-    $("#gpuDetail").textContent = gpu?.error || "CUDA 设备不可见";
+    $("#gpuDetail").textContent = gpu?.error || "No CUDA device available";
   }
 
   const weights = health.weights || {};
@@ -749,12 +749,12 @@ function showHealth(health) {
   $("#modelDetail").textContent = [
     `POST ${weights.postDistill ? "✓" : "×"}`,
     `BASE ${weights.base ? "✓" : "×"}`,
-    `VIGEO 权重 ${weights.vigeo ? "✓" : "×"}`,
+    `VIGEO WEIGHTS ${weights.vigeo ? "✓" : "×"}`,
     ...(geometry.enabled ? [`VIGEO GPU ${geometry.ready ? "✓" : "…"}`] : []),
     ...(previewVae.enabled ? [`FAST VAE ${previewVae.ready ? "✓" : "×"}`] : []),
   ].join(" · ");
 
-  const runtime = health.runtime || {phase: "loading", message: "正在启动常驻模型服务"};
+  const runtime = health.runtime || {phase: "loading", message: "Starting the persistent model service"};
   const runtimeCheck = $("#runtimeCheck");
   const busy = ["loading", "generating", "cancelling"].includes(runtime.phase);
   runtimeCheck.className = `runtime-check ${runtime.phase === "error" ? "error" : busy ? "busy" : runtime.phase === "queued" ? "warning" : "ready"}`;
@@ -768,12 +768,12 @@ function showHealth(health) {
     error: "ERROR",
   })[runtime.phase] || runtime.phase.toUpperCase();
   $("#runtimeDetail").textContent = runtime.phase === "ready" && !previewVae.enabled
-    ? "Post-distill · ViGeo · 官方 Wan VAE 已加载并常驻 GPU"
+    ? "Post-distill · ViGeo · Official Wan VAE loaded on GPU"
     : runtime.message;
 
   topStatus.textContent = health.ready
-    ? (gpu?.capacityReady ? "GPU 与模型就绪" : "GPU 与模型就绪 · 显存风险")
-    : "运行环境未就绪";
+    ? (gpu?.capacityReady ? "GPU and models ready" : "GPU and models ready · Low GPU memory")
+    : "Runtime not ready";
 }
 
 async function refreshHealth() {
@@ -782,7 +782,7 @@ async function refreshHealth() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     showHealth(await response.json());
   } catch (_) {
-    $("#weightStatus").textContent = "后端离线";
+    $("#weightStatus").textContent = "Server offline";
   }
 }
 
@@ -821,16 +821,16 @@ function resetSessionView() {
   clearPlaybackVideos();
   updateFullDownloadMenu();
   $("#monitorEmpty").hidden = false;
-  $("#monitorEmpty strong").textContent = "等待开始生成";
-  $("#monitorEmpty span").textContent = "完成的 chunk 将在这里逐段出现";
+  $("#monitorEmpty strong").textContent = "Ready to generate";
+  $("#monitorEmpty span").textContent = "Completed chunks will appear here";
   $("#jobStatus").className = "status-pill idle";
   $("#jobStatus").textContent = "READY";
-  $("#progressMessage").textContent = "已恢复默认 case，可重新生成";
+  $("#progressMessage").textContent = "Default scene restored. Ready to generate.";
   $("#progressFraction").textContent = "0 / 6";
   $("#progressBar").style.width = "0%";
   $$("#phaseStrip span").forEach(item => item.classList.remove("active", "done"));
   $("#denoiseSteps").textContent = "0/3";
-  $("#revisionLabel").textContent = "尚未创建本地版本";
+  $("#revisionLabel").textContent = "No local revision yet";
   $("#jobLog").textContent = "Default case ready";
   $("#cancelButton").hidden = true;
   $("#formError").textContent = "";
@@ -892,14 +892,14 @@ async function generate() {
   error.textContent = "";
   const prompts = $$("#promptList textarea").map(input => input.value.trim());
   const extending = Boolean(state.jobId && state.jobStatus === "complete" && state.chunks > state.continuationBaseChunks);
-  if (!extending && !state.image) { error.textContent = "请先上传一张参考图。"; return; }
+  if (!extending && !state.image) { error.textContent = "Upload a reference image first."; return; }
   const emptyIndex = prompts.findIndex(prompt => !prompt);
-  if (emptyIndex >= 0) { error.textContent = `请填写第 ${emptyIndex + 1} 个 chunk 的 prompt。`; $$("#promptList textarea")[emptyIndex].focus(); return; }
-  if (state.pathPoints.length < 2) { error.textContent = "请选择预设或绘制一段运镜轨迹。"; return; }
-  if (state.lookPoints.length < 2) { error.textContent = "请选择视角预设或从中心绘制视角轨迹。"; return; }
+  if (emptyIndex >= 0) { error.textContent = `Enter a prompt for chunk ${emptyIndex + 1}.`; $$("#promptList textarea")[emptyIndex].focus(); return; }
+  if (state.pathPoints.length < 2) { error.textContent = "Choose a preset or draw a movement path."; return; }
+  if (state.lookPoints.length < 2) { error.textContent = "Choose a look preset or draw a look path from the center."; return; }
 
   $("#generateButton").disabled = true;
-  $("#generateButton span").textContent = extending ? "正在建立续写版本…" : "正在创建任务…";
+  $("#generateButton span").textContent = extending ? "Creating continuation…" : "Creating task…";
   $("#segmentStream").innerHTML = "";
   clearPlaybackVideos();
   $("#monitorEmpty").hidden = false;
@@ -946,7 +946,7 @@ async function generate() {
         })
       : await fetch("api/jobs", {method: "POST", body: form});
     const payload = await readResponsePayload(response);
-    if (!response.ok) throw new Error(payload.detail || "无法创建任务");
+    if (!response.ok) throw new Error(payload.detail || "Could not create task");
     monitorJob(payload);
   } catch (requestError) {
     error.textContent = requestError.message;
@@ -962,14 +962,14 @@ async function retrySelectedChunk() {
   const prompts = $$("#promptList textarea").map(input => input.value.trim());
   const emptyIndex = prompts.findIndex(prompt => !prompt);
   if (emptyIndex >= 0) {
-    $("#formError").textContent = `请填写第 ${emptyIndex + 1} 个 chunk 的 prompt。`;
+    $("#formError").textContent = `Enter a prompt for chunk ${emptyIndex + 1}.`;
     return;
   }
-  const retained = fromChunk > 0 ? `保留 CH 01–${String(fromChunk).padStart(2, "0")}，` : "不保留已有 chunk，";
-  if (!window.confirm(`${retained}从 CH ${String(fromChunk + 1).padStart(2, "0")} 建立新版本？旧版本不会被覆盖。`)) return;
+  const retained = fromChunk > 0 ? `Keep CH 01–${String(fromChunk).padStart(2, "0")} and ` : "Discard existing chunks in the new revision and ";
+  if (!window.confirm(`${retained}create a new revision from CH ${String(fromChunk + 1).padStart(2, "0")}? The previous revision will be preserved.`)) return;
   const button = $("#retryChunkButton");
   button.disabled = true;
-  button.textContent = "正在建立版本…";
+  button.textContent = "Creating revision…";
   $("#formError").textContent = "";
   try {
     const response = await fetch(`api/jobs/${state.jobId}/retry`, {
@@ -978,7 +978,7 @@ async function retrySelectedChunk() {
       body: JSON.stringify({fromChunk, prompts, seed: Number($("#seed").value), contextChunks: 3}),
     });
     const payload = await readResponsePayload(response);
-    if (!response.ok) throw new Error(payload.detail || "无法建立重生成版本");
+    if (!response.ok) throw new Error(payload.detail || "Could not create regeneration revision");
     $("#segmentStream").innerHTML = "";
     clearPlaybackVideos();
     $("#monitorEmpty").hidden = false;

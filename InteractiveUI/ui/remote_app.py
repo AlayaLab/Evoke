@@ -62,10 +62,10 @@ def runtime_state():
     active=sum(s.get('phase')=='running' and s['usable'] for s in states)
     if ready:
         return {'phase':'generating' if active else 'ready',
-                'message':f'H200 {SP_SIZE} 卡 SP · {ready}/{COUNT} 实例就绪 · {active} 个任务生成中','jobId':None}
+                'message':f'H200 SP ×{SP_SIZE} · {ready}/{COUNT} workers ready · {active} active tasks','jobId':None}
     errors=[s.get('message','') for s in states if s.get('phase')=='error']
     return {'phase':'error' if errors else 'loading',
-            'message':errors[0] if errors else f'正在加载 H200 {SP_SIZE} 卡 SP 推理实例…','jobId':None}
+            'message':errors[0] if errors else f'Loading H200 SP ×{SP_SIZE} inference workers…','jobId':None}
 
 
 def geometry_state():

@@ -1,7 +1,7 @@
 class ContinuousFramePlayer {
  constructor(canvas,{onFrame=()=>{},onState=()=>{},onError=()=>{},onEnd=()=>{},decode=null,initialBufferFrames=72,recoveryBufferFrames=60,publicationLimitFrames=96}={}){
   if(!Number.isInteger(publicationLimitFrames)||publicationLimitFrames<1||publicationLimitFrames>96||
-    ![initialBufferFrames,recoveryBufferFrames].every(n=>Number.isInteger(n)&&n>=1&&n<=publicationLimitFrames))throw new Error('无效播放配置');
+    ![initialBufferFrames,recoveryBufferFrames].every(n=>Number.isInteger(n)&&n>=1&&n<=publicationLimitFrames))throw new Error('Invalid playback settings');
   this.initialBufferFrames=initialBufferFrames;this.recoveryBufferFrames=recoveryBufferFrames;this.publicationLimitFrames=publicationLimitFrames;
   this.canvas=canvas;this.context=canvas.getContext('2d',{alpha:false});
   this.onFrame=onFrame;this.onState=onState;this.onError=onError;this.onEnd=onEnd;
@@ -26,10 +26,10 @@ class ContinuousFramePlayer {
  }
  enqueue(index,data,receivedAt=performance.now()){
   if(this.stopped)return;
-  if(!Number.isSafeInteger(index)||index<1)return this.fail('收到无效的画面编号。');
+  if(!Number.isSafeInteger(index)||index<1)return this.fail('Received an invalid frame number.');
   if(index<=this.received){this.metrics.duplicateFrames++;return;}
-  if(index!==this.received+1)return this.fail('连接中断导致画面缺失，请重新进入世界以保持连续播放。');
-  if(this.frames.size>=this.publicationLimitFrames)return this.fail('播放缓冲超过限制，请重新进入世界。');
+  if(index!==this.received+1)return this.fail('Frames were lost during a disconnect. Re-enter the world to resume continuous playback.');
+  if(this.frames.size>=this.publicationLimitFrames)return this.fail('Playback buffer limit exceeded. Please re-enter the world.');
   const entry={index,data,receivedAt,image:null,decodedAt:null};this.received=index;
   this.frames.set(index,entry);this.pending.push(entry);this.metrics.arrivals.push({index,at:receivedAt});
   if(this.metrics.arrivals.length>12000)this.metrics.arrivals.shift();
@@ -40,9 +40,9 @@ class ContinuousFramePlayer {
    const entry=this.pending.shift();this.decoding++;
    Promise.resolve().then(()=>this.decode(entry.data)).then(image=>{
     if(this.stopped){image.close?.();return;}
-    if(image.width!==640||image.height!==384){image.close?.();throw new Error('生成画面尺寸不正确。');}
+    if(image.width!==640||image.height!==384){image.close?.();throw new Error('Generated frame dimensions are incorrect.');}
     entry.image=image;entry.data=null;entry.decodedAt=performance.now();
-   }).catch(error=>this.fail(error.message||'画面解码失败，请重新进入世界。')).finally(()=>{this.decoding--;this.pump();if(!this.stopped)this.emitState();});
+   }).catch(error=>this.fail(error.message||'Frame decoding failed. Please re-enter the world.')).finally(()=>{this.decoding--;this.pump();if(!this.stopped)this.emitState();});
   }
  }
  setPaused(value){if(this.stopped)return;this.paused=value;this.nextAt=0;this.emitState();}
@@ -95,7 +95,7 @@ class InputMailbox {
   const packet={...value,keys:[...value.keys]};
   if(this.pending.at(-1)?.sequence===packet.sequence){this.pending[this.pending.length-1]=packet;this.metrics.coalesced++;}
   else{
-   if(this.pending.length>=64){this.close();this.onError('控制连接积压，请重新进入世界。');return;}
+   if(this.pending.length>=64){this.close();this.onError('Control connection overloaded. Please re-enter the world.');return;}
    this.pending.push(packet);this.metrics.maxPending=Math.max(this.metrics.maxPending,this.pending.length);
   }
   this.flush();
@@ -127,17 +127,17 @@ function promptEnabled(){return !!(session?.supportsLivePrompt&&session.promptUr
 function promptControls(){
  const enabled=promptEnabled();$('eventPrompt').disabled=!enabled;$('eventMode').disabled=!enabled;
  $('submitPrompt').disabled=!enabled||promptSending||!$('eventPrompt').value.trim();
- $('submitPrompt').textContent=promptSending?'提交中…':latestPrompt?.error&&(latestPrompt.stage===0||latestPrompt.errorKind==='model')?'重试提交 →':'提交事件 →';
- if(!session){$('eventStatus').textContent='进入世界后可提交实时事件。';$('eventStatus').dataset.error='false';}
- else if(!enabled){$('eventStatus').textContent='当前服务暂不支持实时事件，请稍后刷新重试。';$('eventStatus').dataset.error='false';}
+ $('submitPrompt').textContent=promptSending?'Submitting…':latestPrompt?.error&&(latestPrompt.stage===0||latestPrompt.errorKind==='model')?'Retry →':'Submit event →';
+ if(!session){$('eventStatus').textContent='Enter the world to submit live events.';$('eventStatus').dataset.error='false';}
+ else if(!enabled){$('eventStatus').textContent='Live events are unavailable. Please refresh and try again later.';$('eventStatus').dataset.error='false';}
 }
 function renderPrompt(){
  promptControls();if(!promptEnabled()||!latestPrompt)return;
  const value=latestPrompt;
  $('eventStatus').dataset.error=String(!!value.error);
- $('eventStatus').textContent=value.error?`提交失败：${value.error}`:
-  value.stage>=3?'已播放到新描述对应片段':value.stage>=2?'已用于生成，等待播放':
-  value.stage>=1?(paused?'已提交，恢复探索后等待模型采用':'已提交，等待模型采用'):'正在提交事件…';
+ $('eventStatus').textContent=value.error?`Submission failed: ${value.error}`:
+  value.stage>=3?'Now showing the new prompt':value.stage>=2?'Applied to generation; awaiting playback':
+  value.stage>=1?(paused?'Submitted; will apply after you resume':'Submitted; waiting for the model'):'Submitting event…';
 }
 function resetPrompt(){latestPrompt=null;promptSending=false;promptWindows=new Map();for(const key of Object.keys(promptMetrics))promptMetrics[key]=[];$('eventPrompt').value='';renderPrompt();}
 function markPromptPlayed(frame){
@@ -157,7 +157,7 @@ function updatePromptState(data){
  if(value.revision){
   const window=promptWindows.get(value.revision);
   if(window||data.promptRevision===value.revision){value.stage=Math.max(value.stage,2);if(value.errorKind==='network'){value.error=null;value.errorKind=null;}}
-  if(data.promptError?.revision===value.revision&&value.stage<2){value.error=data.promptError.message||'模型未能采用此事件，请重新提交。';value.errorKind='model';}
+  if(data.promptError?.revision===value.revision&&value.stage<2){value.error=data.promptError.message||'The model could not apply this event. Please resubmit.';value.errorKind='model';}
   if(window){const frame=latency.frames.find(f=>f.index>=window.firstOutputFrame&&f.index<=window.lastOutputFrame);if(frame)markPromptPlayed(frame);}
  }
  renderPrompt();
@@ -166,7 +166,7 @@ function promptRequestId(){if(globalThis.crypto?.randomUUID)return crypto.random
 async function submitPrompt(){
  if(!promptEnabled()||promptSending)return;
  const text=$('eventPrompt').value.trim(),mode=$('eventMode').value;if(!text)return;
- if(Array.from(text).length>2000){$('eventStatus').textContent='事件描述最多 2000 字。';$('eventStatus').dataset.error='true';return;}
+ if(Array.from(text).length>2000){$('eventStatus').textContent='Event prompts can contain up to 2,000 characters.';$('eventStatus').dataset.error='true';return;}
  const sid=session.id;
  if(!latestPrompt||latestPrompt.text!==text||latestPrompt.mode!==mode||latestPrompt.errorKind==='model'){latestPrompt={text,mode,requestId:promptRequestId(),revision:null,stage:0,at:performance.now(),error:null};}
  const value=latestPrompt;value.error=null;value.errorKind=null;promptSending=true;
@@ -176,12 +176,12 @@ async function submitPrompt(){
   const result=await(await request(session.promptUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:text,mode,requestId:value.requestId}),signal:controller.signal})).json();
   if(session?.id!==sid||latestPrompt!==value)return;
   const accepted=result.promptRequest||result;
-  if(!Number.isSafeInteger(accepted.revision)||accepted.revision<=0)throw new Error('服务未返回事件确认，请重试。');
+  if(!Number.isSafeInteger(accepted.revision)||accepted.revision<=0)throw new Error('No event confirmation received. Please retry.');
   value.revision=accepted.revision;value.stage=Math.max(value.stage,1);if(value.errorKind==='network'){value.error=null;value.errorKind=null;}
   updatePromptState({...result,promptRequest:{...accepted,requestId:value.requestId}});
  }catch(error){
   if(session?.id!==sid||latestPrompt!==value)return;
-  if(value.stage===0){value.error=error.name==='AbortError'?'连接超时，请重试；重试不会重复提交。':error.message;value.errorKind='network';}
+  if(value.stage===0){value.error=error.name==='AbortError'?'Connection timed out. Please retry; your event will not be duplicated.':error.message;value.errorKind='network';}
  }finally{clearTimeout(timer);if(session?.id===sid&&latestPrompt===value){promptSending=false;renderPrompt();}}
 }
 $('submitPrompt').onclick=submitPrompt;
@@ -213,15 +213,15 @@ $('world').addEventListener('load',()=>{
   latency.frames.splice(0,Math.max(0,latency.frames.length-3000));matchLatency();
  });
 });
-const phases={playback_wait:'连续播放',starting:'正在进入世界',queued:'等待 GPU',generating:'世界正在生成',streaming:'模型画面',waiting:'准备下一次更新',paused:'已暂停',stopped:'探索已结束',error:'生成遇到问题'};
+const phases={playback_wait:'Continuous playback',starting:'Entering world',queued:'Waiting for GPU',generating:'Generating world',streaming:'Generated view',waiting:'Preparing next update',paused:'Paused',stopped:'Exploration ended',error:'Generation error'};
 let warmupCompleted=0;
 function renderPlaybackStatus(value){
  if(!session)return;
  const status=$('modelStatus'),total=session.playbackSettings?.warmupChunks||0;
  const warming=warmupCompleted<total,buffering=value.state==='buffering';
- status.textContent=paused?'已暂停':warming?`预热 ${warmupCompleted}/${total}`:buffering?'缓冲中':'探索中';
+ status.textContent=paused?'Paused':warming?`Warmup ${warmupCompleted}/${total}`:buffering?'Buffering':'Exploring';
  status.dataset.state=paused?'ready':warming||buffering?'loading':'active';
- status.title=warming?'正在建立世界历史，预热画面不播放':buffering?`已准备 ${(value.ready/24).toFixed(1)} 秒画面`:'';
+ status.title=warming?'Building world history; warmup frames are not shown':buffering?`${(value.ready/24).toFixed(1)} s of video ready`:'';
 }
 let workspaceActive=false;
 function selectPanel(name,focus=false){
@@ -237,7 +237,7 @@ for(const [name,id] of [['setup','tabSetup'],['events','tabEvents']]){
  });
 }
 function updateWorkspace(){const active=!!session;if(active!==workspaceActive){workspaceActive=active;selectPanel(active?'events':'setup');}}
-function sceneControls(){updateWorkspace();promptControls();const locked=!!session||starting;$('prompt').disabled=locked;$('reference').disabled=locked;$('quality').disabled=locked;$('vaePrecision').disabled=locked;$('warmupChunks').disabled=locked;document.querySelectorAll('.reference-option').forEach(b=>b.disabled=locked);$('sceneHint').textContent=locked?'探索中：按住 WASD 连续移动，IJKL 转向。可在“实时事件”中提交新描述；结束后可更换起始场景、参考图和 VAE 精度。':'选择起点后进入世界。按住 WASD 移动，IJKL 转向；Esc 暂停。';}
+function sceneControls(){updateWorkspace();promptControls();const locked=!!session||starting;$('prompt').disabled=locked;$('reference').disabled=locked;$('quality').disabled=locked;$('vaePrecision').disabled=locked;$('warmupChunks').disabled=locked;document.querySelectorAll('.reference-option').forEach(b=>b.disabled=locked);$('sceneHint').textContent=locked?'Hold WASD to move and IJKL to look. Use Live Events to change the prompt. End exploration to change the scene or precision.':'Choose a scene and enter. Hold WASD to move, IJKL to look; Esc to pause.';}
 function selectReference(item){if(session||starting)return;reference=null;referencePath=item.imageUrl;if(referenceUrl?.startsWith('blob:'))URL.revokeObjectURL(referenceUrl);referenceUrl=url(item.imageUrl);$('world').src=referenceUrl;$('prompt').value=item.prompt;$('selectedReference').textContent=item.title;$('reference').value='';document.querySelectorAll('.reference-option').forEach(b=>{const selected=b.dataset.reference===item.id;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});}
 function notice(text){$('notice').textContent=text;clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>$('notice').textContent='',5000);}
 function send(value){if(socket?.readyState===WebSocket.OPEN)inputMailbox?.push(value);}
@@ -249,15 +249,15 @@ function input(){
  document.querySelectorAll('[data-key]').forEach(el=>el.classList.toggle('active',state.keys.includes(el.dataset.key)));
 }
 function release(){keys.clear();pointers.clear();input();}
-function pause(value){if(!session)return;paused=value;renderPrompt();framePlayer?.setPaused(value);release();$('pause').textContent=paused?'继续探索':'暂停';$('overlay').hidden=!paused;
- if(paused){$('overlay').innerHTML='<strong>探索已暂停</strong><span>点击画面继续 · 当前生成可能仍在完成</span>';}else{$('viewport').focus();if(framePlayer){framePlayer.lastState='';framePlayer.emitState();}input();}}
+function pause(value){if(!session)return;paused=value;renderPrompt();framePlayer?.setPaused(value);release();$('pause').textContent=paused?'Resume':'Pause';$('overlay').hidden=!paused;
+ if(paused){$('overlay').innerHTML='<strong>Exploration paused</strong><span>Click the view to resume. The current chunk may still be generating.</span>';}else{$('viewport').focus();if(framePlayer){framePlayer.lastState='';framePlayer.emitState();}input();}}
 function connect(){
  if(!session)return;
  const address=new URL(session.inputUrl,base);address.protocol=location.protocol==='https:'?'wss:':'ws:';
  socket=new WebSocket(address);
  const current=socket;const mailbox=new InputMailbox(value=>current.send(JSON.stringify(value)),{onError:message=>{notice(message);finish();}});
  inputMailbox?.close();inputMailbox=mailbox;window.evokeInputDelivery=mailbox.metrics;
- socket.onopen=()=>{if(socket!==current)return;connected=true;$('connection').textContent='● 按键已连接';input();};
+ socket.onopen=()=>{if(socket!==current)return;connected=true;$('connection').textContent='● Controls connected';input();};
  socket.onmessage=event=>{
   if(socket!==current||!session)return;
   const data=JSON.parse(event.data);
@@ -270,45 +270,45 @@ function connect(){
   const warming=warmupCompleted<Number(session.playbackSettings?.warmupChunks||0);
   if(framePlayer)renderPlaybackStatus({state:framePlayer.buffering?'buffering':'playing',ready:framePlayer.readyCount()});
   if(data.inputWindows){latency.windows=data.inputWindows;matchLatency();}
-  $('phase').textContent=framePlayer?(paused?'已暂停':framePlayer.buffering?'世界预览':'连续播放 · 24 fps'):(phases[data.phase]||'等待模型');
-  if(!framePlayer)$('worldTime').textContent=`${((data.latestFrame||0)/24).toFixed(1)} 秒`;
+  $('phase').textContent=framePlayer?(paused?'Paused':framePlayer.buffering?'World preview':'Continuous playback · 24 fps'):(phases[data.phase]||'Waiting for model');
+  if(!framePlayer)$('worldTime').textContent=`${((data.latestFrame||0)/24).toFixed(1)} s`;
   if(data.camera)$('position').textContent=`X ${data.camera.x.toFixed(1)} / Z ${data.camera.z.toFixed(1)}`;
-  $('inputStatus').textContent=paused?'已暂停 · 点击画面继续':seq>(framePlayer?playedSequence:(data.displayedSequence??data.appliedSequence??-1))?'按键已接收 · 等待模型下一次更新':'当前操作已用于生成';
-  if(data.chunkSeconds)$('latency').textContent=`最近一次更新 ${data.chunkSeconds.toFixed(1)} 秒`;
-  if(warming){$('phase').textContent='隐藏预热';$('inputStatus').textContent='预热完成并开始播放后，即可控制';}
+  $('inputStatus').textContent=paused?'Paused · Click the view to resume':seq>(framePlayer?playedSequence:(data.displayedSequence??data.appliedSequence??-1))?'Input received · Awaiting next update':'Current input applied to generation';
+  if(data.chunkSeconds)$('latency').textContent=`Last update ${data.chunkSeconds.toFixed(1)} s`;
+  if(warming){$('phase').textContent='Hidden warmup';$('inputStatus').textContent='Controls become available after warmup, when playback begins';}
   if(data.latestFrame>0&&!paused&&!framePlayer)$('overlay').hidden=true;
-  if(data.phase==='error'){notice(data.message||'生成失败');finish(false);}
-  if(data.phase==='stopped'&&session&&!framePlayer){notice('探索已结束，可重新选择起点进入。');finish(false);}
+  if(data.phase==='error'){notice(data.message||'Generation failed');finish(false);}
+  if(data.phase==='stopped'&&session&&!framePlayer){notice('Exploration ended. Choose a scene to start again.');finish(false);}
  };
- socket.onclose=event=>{mailbox.close();if(socket!==current)return;if(event.code===1008){finish(false);notice('探索会话已结束，请重新进入世界。');return;}connected=false;$('connection').textContent='连接断开 · 正在重连';release();if(session)reconnect=setTimeout(connect,1000);};
+ socket.onclose=event=>{mailbox.close();if(socket!==current)return;if(event.code===1008){finish(false);notice('This session has ended. Please re-enter the world.');return;}connected=false;$('connection').textContent='Disconnected · Reconnecting';release();if(session)reconnect=setTimeout(connect,1000);};
  socket.onerror=()=>current.close();
 }
-async function request(path,options){const r=await fetch(url(path),options);if(!r.ok){const v=await r.json().catch(()=>({}));throw new Error(typeof v.detail==='string'?v.detail:`请求失败 ${r.status}`);}return r;}
+async function request(path,options){const r=await fetch(url(path),options);if(!r.ok){const v=await r.json().catch(()=>({}));throw new Error(typeof v.detail==='string'?v.detail:`Request failed ${r.status}`);}return r;}
 async function finish(sendStop=true){
  frameSource?.close();frameSource=null;framePlayer?.stop();framePlayer=null;$('playback').hidden=true;$('world').hidden=false;
  const old=session;session=null;inputMailbox?.close();inputMailbox=null;connected=false;clearTimeout(reconnect);release();socket?.close();socket=null;
  if(sendStop&&old)try{await request(`api/live/${old.id}/stop`,{method:'POST'});}catch(error){notice(error.message);}
  document.body.classList.remove('playing');$('pause').disabled=true;$('stop').disabled=true;$('overlay').hidden=false;
- $('overlay').innerHTML='<strong>从这幅画面开始探索</strong><span>WASD 移动 · IJKL 转动视角</span>';
- $('world').src=referenceUrl||url('api/default-case/reference');$('connection').textContent='未进入';$('phase').textContent='起始画面';
- $('inputStatus').textContent='点击“进入世界”开始';sceneControls();health();
+ $('overlay').innerHTML='<strong>Start exploring from this image</strong><span>WASD to move · IJKL to look</span>';
+ $('world').src=referenceUrl||url('api/default-case/reference');$('connection').textContent='Not started';$('phase').textContent='Starting image';
+ $('inputStatus').textContent='Click Enter world to begin';sceneControls();health();
 }
 $('start').onclick=async()=>{
  if(starting||session)return;starting=true;$('start').disabled=true;sceneControls();
  try{
-  const prompt=$('prompt').value.trim();if(!prompt)throw new Error('请描述你要探索的世界。');
+  const prompt=$('prompt').value.trim();if(!prompt)throw new Error('Please describe the world you want to explore.');
   const image=reference||await (await request(referencePath)).blob();
   const form=new FormData();form.append('reference',image,reference?.name||'reference.jpg');form.append('prompt',prompt);form.append('quality',$('quality').value);form.append('vae_precision',$('vaePrecision').value);form.append('playback_mode','continuous');form.append('warmup_chunks',$('warmupChunks').value);form.append('ahead_chunks','1');
   session=await (await request('api/live/sessions',{method:'POST',body:form})).json();
-  if(session.vaePrecision!==$('vaePrecision').value||session.playbackMode!=='continuous'||session.playbackSettings?.aheadChunks!==1||session.playbackSettings?.warmupChunks!==Number($('warmupChunks').value)){await finish();throw new Error('服务尚未支持连续播放，请稍后刷新页面重试。');}
-  paused=false;warmupCompleted=0;seq=0;lastInput='';resetPrompt();for(const key of Object.keys(latency))latency[key]=[];document.body.classList.add('playing');$('pause').disabled=false;$('stop').disabled=false;$('pause').textContent='暂停';
+  if(session.vaePrecision!==$('vaePrecision').value||session.playbackMode!=='continuous'||session.playbackSettings?.aheadChunks!==1||session.playbackSettings?.warmupChunks!==Number($('warmupChunks').value)){await finish();throw new Error('Continuous playback is unavailable. Please refresh and try again later.');}
+  paused=false;warmupCompleted=0;seq=0;lastInput='';resetPrompt();for(const key of Object.keys(latency))latency[key]=[];document.body.classList.add('playing');$('pause').disabled=false;$('stop').disabled=false;$('pause').textContent='Pause';
   $('overlay').hidden=true;
   if(session.streamTransport==='sse'){
    const sid=session.id;playedSequence=-1;
    framePlayer=new ContinuousFramePlayer($('playback'),{
     ...session.playbackSettings,
     onFrame:frame=>{
-     $('world').hidden=true;$('playback').hidden=false;$('worldTime').textContent=`${(frame.index/24).toFixed(1)} 秒`;
+     $('world').hidden=true;$('playback').hidden=false;$('worldTime').textContent=`${(frame.index/24).toFixed(1)} s`;
      latency.frames.push({...frame,loadedAt:frame.decodedAt});latency.frames.splice(0,Math.max(0,latency.frames.length-3000));
      const window=latency.windows.find(w=>w.firstOutputFrame<=frame.index&&w.lastOutputFrame>=frame.index);
      if(window)for(const entry of window.inputs){if(entry.firstOutputFrame<=frame.index&&entry.sequence!=null)playedSequence=Math.max(playedSequence,entry.sequence);}
@@ -317,11 +317,11 @@ $('start').onclick=async()=>{
     onState:value=>{
      if(!session||session.id!==sid)return;
      renderPlaybackStatus(value);
-     if(value.state==='buffering'&&!paused){$('overlay').hidden=true;$('phase').textContent='世界预览';}
-     if(value.state==='playing'&&!paused){$('overlay').hidden=true;$('phase').textContent='连续播放 · 24 fps';}
+     if(value.state==='buffering'&&!paused){$('overlay').hidden=true;$('phase').textContent='World preview';}
+     if(value.state==='playing'&&!paused){$('overlay').hidden=true;$('phase').textContent='Continuous playback · 24 fps';}
     },
     onError:message=>{notice(message);finish();},
-    onEnd:()=>{if(session?.id===sid){notice('探索已结束。');finish(false);}}
+    onEnd:()=>{if(session?.id===sid){notice('Exploration ended.');finish(false);}}
    });
    window.evokePlayback=framePlayer.metrics;
    frameSource=new EventSource(url(session.streamUrl));
@@ -329,9 +329,9 @@ $('start').onclick=async()=>{
     if(session?.id!==sid)return;
     framePlayer?.enqueue(Number(event.lastEventId),event.data,performance.now());
    });
-   frameSource.addEventListener('gap',()=>framePlayer?.fail('连接中断导致画面缺失，请重新进入世界以保持连续播放。'));
+   frameSource.addEventListener('gap',()=>framePlayer?.fail('Frames were lost during a disconnect. Re-enter the world to resume continuous playback.'));
    frameSource.addEventListener('done',()=>{frameSource?.close();framePlayer?.end();});
-   frameSource.addEventListener('error',event=>{if(event.data){framePlayer?.fail('生成已中断，请重新进入世界。');}});
+   frameSource.addEventListener('error',event=>{if(event.data){framePlayer?.fail('Generation was interrupted. Please re-enter the world.');}});
   }else{$('world').src=url(session.streamUrl);}
   connect();$('viewport').focus();
  }catch(error){notice(error.message);}finally{starting=false;sceneControls();health();}
@@ -354,13 +354,13 @@ for(const button of document.querySelectorAll('[data-key]')){
 }
 $('speed').oninput=()=>{$('speedValue').value=Number($('speed').value).toFixed(1);input();};
 $('lookSpeed').oninput=()=>{$('lookValue').value=`${$('lookSpeed').value}°/s`;input();};
-$('fullscreen').onclick=async()=>{try{await $('viewport').requestFullscreen();$('viewport').focus();}catch{notice('浏览器无法进入全屏。');}};
+$('fullscreen').onclick=async()=>{try{await $('viewport').requestFullscreen();$('viewport').focus();}catch{notice('Your browser could not enter fullscreen.');}};
 $('reference').onchange=()=>{
  const file=$('reference').files[0];if(!file)return;
- if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>25*1024*1024){$('reference').value='';return notice('请选择不超过 25 MB 的 JPG、PNG 或 WebP 图片。');}
+ if(!['image/png','image/jpeg','image/webp'].includes(file.type)||file.size>25*1024*1024){$('reference').value='';return notice('Choose a JPG, PNG, or WebP image under 25 MB.');}
  reference=file;if(referenceUrl?.startsWith('blob:'))URL.revokeObjectURL(referenceUrl);$('selectedReference').textContent=file.name;document.querySelectorAll('.reference-option').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false');});referenceUrl=URL.createObjectURL(file);$('world').src=referenceUrl;
 };
-async function health(){try{const h=await (await request('api/health')).json();const status=$('modelStatus');status.textContent=h.ready?(session?'探索中':h.runtime?.phase==='generating'?'服务运行中':'已就绪'):h.runtime?.phase==='error'?'暂时不可用':'正在准备';status.dataset.state=h.ready?(session?'active':'ready'):h.runtime?.phase==='error'?'error':'loading';$('start').disabled=!h.ready||starting||!!session;if(session&&framePlayer)renderPlaybackStatus({state:framePlayer.buffering?'buffering':'playing',ready:framePlayer.readyCount()});else status.title='';}catch{$('modelStatus').textContent='正在连接';$('modelStatus').dataset.state='loading';$('start').disabled=true;}}
+async function health(){try{const h=await (await request('api/health')).json();const status=$('modelStatus');status.textContent=h.ready?(session?'Exploring':h.runtime?.phase==='generating'?'Service running':'Ready'):h.runtime?.phase==='error'?'Unavailable':'Preparing';status.dataset.state=h.ready?(session?'active':'ready'):h.runtime?.phase==='error'?'error':'loading';$('start').disabled=!h.ready||starting||!!session;if(session&&framePlayer)renderPlaybackStatus({state:framePlayer.buffering?'buffering':'playing',ready:framePlayer.readyCount()});else status.title='';}catch{$('modelStatus').textContent='Connecting';$('modelStatus').dataset.state='loading';$('start').disabled=true;}}
 setInterval(()=>{if(session)input();},100);setInterval(health,5000);health();
 request('api/live/references').then(r=>r.json()).then(data=>{for(const item of data.items){const button=document.createElement('button');button.type='button';button.className='reference-option';button.dataset.reference=item.id;button.setAttribute('aria-label',item.title);const image=document.createElement('img');image.src=url(item.imageUrl);image.alt=item.title;const title=document.createElement('span');title.textContent=item.title;button.append(image,title);button.onclick=()=>selectReference(item);$('referenceList').append(button);}const initial=data.items.find(item=>item.id==='meteor')||data.items[0];if(initial)selectReference(initial);sceneControls();}).catch(error=>notice(error.message));
 window.addEventListener('pagehide',()=>{framePlayer?.stop();frameSource?.close();if(session){navigator.sendBeacon(url(`api/live/${session.id}/stop`));socket?.close();}});

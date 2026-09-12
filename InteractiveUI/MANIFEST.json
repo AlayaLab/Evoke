@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4527,
-      "sha256": "8efce5d38dbd793c7cadc622868ee8ccf25ca0b6e93834ee6af061f3e28dadbc"
+      "bytes": 4532,
+      "sha256": "71923b0879637b3f434e1ce740db78a470189968b328a608dc88924f19aec67b"
     },
     {
       "path": "RELEASE_NOTE.md",
@@ -1297,18 +1297,18 @@
     },
     {
       "path": "ui/app.py",
-      "bytes": 60285,
-      "sha256": "7676e34eb5c39151f03a63dee3a49f75a63e16fa296097902b3cdce77dd510b7"
+      "bytes": 60344,
+      "sha256": "8d4ae5c5b3ef43e95a3a322d5b7fdee0594a7be557ed01123a6d0179eea6d3f6"
     },
     {
       "path": "ui/assets/world-explorer-live.png",
-      "bytes": 322880,
-      "sha256": "5464868ec3891d3caddfd9624e4bc714855c9ed765fc601d2a96535c589cce9f"
+      "bytes": 322101,
+      "sha256": "2c512fe3e214fb45181c369ef7318844f7ededbbe6c165ce346470dc7e1bccee"
     },
     {
       "path": "ui/assets/world-explorer-setup.png",
-      "bytes": 385308,
-      "sha256": "56eab29e75a6a007e669d1bc6bc4685726854a8746ef0a70d2cc9051bf573eb6"
+      "bytes": 384863,
+      "sha256": "d8398622a907a3ef34409eb8ee8c22107122da18be45e68d0739be830d5dad30"
     },
     {
       "path": "ui/camera_diagnostics.py",
@@ -1352,8 +1352,8 @@
     },
     {
       "path": "ui/gpu_worker_pool.py",
-      "bytes": 7053,
-      "sha256": "f16b9be3aa7f51fe4ca4ea8f157d2ba0e6ad09fb3bc21a727f7ec2f04a00bffd"
+      "bytes": 7069,
+      "sha256": "c555788077c99b28f184b95208ab3e9bb3aa9dded70beb043316e773bfc701de"
     },
     {
       "path": "ui/jpeg_output.py",
@@ -1367,8 +1367,8 @@
     },
     {
       "path": "ui/live_api.py",
-      "bytes": 20024,
-      "sha256": "315b327372d4bba340f5d24c6f27e408c2875ed6c318ccef9b30d613b086ed8b"
+      "bytes": 20276,
+      "sha256": "46c71d8b26bf1e2d89d4c8ee6a217fc5efd1713b9df12d8577deb1e1648a8890"
     },
     {
       "path": "ui/live_artifacts.py",
@@ -1387,8 +1387,8 @@
     },
     {
       "path": "ui/live_runtime.py",
-      "bytes": 26927,
-      "sha256": "1d321309e8bc61050492d01cd3d7b60c5d3b3ee9217d5880b528f15de57b5569"
+      "bytes": 26938,
+      "sha256": "e4883f31965f30cbe28c22ed7802542d3a99ae313679a6405a8edf759fde0f77"
     },
     {
       "path": "ui/multiwarp.py",
@@ -1402,8 +1402,8 @@
     },
     {
       "path": "ui/playback_settings.py",
-      "bytes": 919,
-      "sha256": "f6baa6c042425439fa8b840256d8ffd31eb68afc06b25f5c6c3bb5005ca87d27"
+      "bytes": 959,
+      "sha256": "c0677ae62356fdd2c2423b2fa470dc479861a467ad429586f870fe49e70731c8"
     },
     {
       "path": "ui/player.py",
@@ -1412,8 +1412,8 @@
     },
     {
       "path": "ui/remote_app.py",
-      "bytes": 5365,
-      "sha256": "60a36b0cd02e96b0e48a18bce2feca40908644cc2c4032d1f5c35faca8e69c97"
+      "bytes": 5356,
+      "sha256": "d9436fd1ea477da5c169a87c5d09d1f0f821b9a7a00aceecf116db06acce3db4"
     },
     {
       "path": "ui/requirements.txt",
@@ -1432,8 +1432,8 @@
     },
     {
       "path": "ui/runtime/vigeo_hook.py",
-      "bytes": 6462,
-      "sha256": "abfd92d866e881db29b1bf7cb34c5e89d7ab29f3d80097dd9c9864f386a5e754"
+      "bytes": 6456,
+      "sha256": "7a68992825c6aa8bc89c1b9126c396a47fc9534d39594fea438c4b419f4fb03b"
     },
     {
       "path": "ui/serving_app.py",
@@ -1457,13 +1457,13 @@
     },
     {
       "path": "ui/static/app.js",
-      "bytes": 43221,
-      "sha256": "d03056ddb2688caa5d06c8d9f9a55690c0be9b4c99f454552dccf92fd3612b55"
+      "bytes": 43326,
+      "sha256": "3e30aa0d06feda687f3d2a9a515dcc539ef0757110db3739a215dd195abe6490"
     },
     {
       "path": "ui/static/index.html",
-      "bytes": 12444,
-      "sha256": "a871175cb3447874ad97f229e16ebb795c4f13af71c5cbd5ab28105d4dcf336e"
+      "bytes": 12542,
+      "sha256": "1f701eb6f4caaf19255bb82b6a823a16df056dc3b40139d5424a1cdecb1da5a8"
     },
     {
       "path": "ui/static/logo.png",
@@ -1477,13 +1477,13 @@
     },
     {
       "path": "ui/static/player.html",
-      "bytes": 8043,
-      "sha256": "21be3a67cab50ad4e1428271d09edb7d604c553a422d52dc6ef50462bc270bc4"
+      "bytes": 8004,
+      "sha256": "fe5be71c68b19ac9fe9d128b7969d46f29b5d23ca7788dd2cd5daa41ff0df14d"
     },
     {
       "path": "ui/static/player.js",
-      "bytes": 30208,
-      "sha256": "ab9d5a1969c10f80e1023bc637c51c58af0ba9af71cbea8f2697a6d401d327cc"
+      "bytes": 30336,
+      "sha256": "37cff0eadde0c30a3cbefb2a731fc121c8d0b07a1ba57b454473aede67c074be"
     },
     {
       "path": "ui/static/styles.css",

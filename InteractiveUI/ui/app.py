@@ -107,11 +107,11 @@ def _read_progress(output_root: Path, chunks: int, chunk_offset: int = 0, total_
         "chunk_done": 1.0,
     }.get(phase, 0.01)
     labels = {
-        "preparing": f"CH {chunk_index + 1}/{total_chunks} · 准备输入",
-        "geometry": f"CH {chunk_index + 1}/{total_chunks} · ViGeo / Frame Bank 几何准备",
-        "denoising": f"CH {chunk_index + 1}/{total_chunks} · 去噪 {step}/{total_steps}",
-        "decoding": f"CH {chunk_index + 1}/{total_chunks} · VAE 解码并写入预览",
-        "chunk_done": f"CH {chunk_index + 1}/{total_chunks} · 预览已生成",
+        "preparing": f"CH {chunk_index + 1}/{total_chunks} · Preparing inputs",
+        "geometry": f"CH {chunk_index + 1}/{total_chunks} · Preparing ViGeo / Frame Bank geometry",
+        "denoising": f"CH {chunk_index + 1}/{total_chunks} · Denoising {step}/{total_steps}",
+        "decoding": f"CH {chunk_index + 1}/{total_chunks} · Decoding with VAE and writing preview",
+        "chunk_done": f"CH {chunk_index + 1}/{total_chunks} · Preview ready",
     }
     return {
         "phase": phase,
@@ -613,22 +613,22 @@ def _runtime_state() -> dict[str, str | None]:
     if not active:
         if worker_phase in {"loading", "ready", "error"}:
             if worker_phase == "ready" and _vigeo_preload_state()["ready"]:
-                preview_name = "LightTAE" if _preview_vae_state()["enabled"] else "官方 Wan VAE"
-                worker_message = f"Post-distill · ViGeo · {preview_name} 已加载并常驻 GPU"
+                preview_name = "LightTAE" if _preview_vae_state()["enabled"] else "Official Wan VAE"
+                worker_message = f"Post-distill · ViGeo · {preview_name} loaded on GPU"
             return {"phase": worker_phase, "message": worker_message, "jobId": None}
         if WORKER_PROCESS is not None and WORKER_PROCESS.poll() is None:
-            return {"phase": "loading", "message": "正在启动常驻模型服务", "jobId": None}
-        return {"phase": "error", "message": "常驻模型服务未运行", "jobId": None}
+            return {"phase": "loading", "message": "Starting the model service", "jobId": None}
+        return {"phase": "error", "message": "Model service is not running", "jobId": None}
     job = max(active, key=lambda item: item.created_at)
     if job.status == "queued":
-        return {"phase": "queued", "message": "等待 GPU", "jobId": job.id}
+        return {"phase": "queued", "message": "Waiting for GPU", "jobId": job.id}
     if job.status == "cancelling":
-        return {"phase": "cancelling", "message": "正在停止任务", "jobId": job.id}
+        return {"phase": "cancelling", "message": "Stopping task", "jobId": job.id}
     _discover_segments(job)
     if job.segments:
         return {
             "phase": "generating",
-            "message": f"模型已加载 · {len(job.segments)}/{job.chunks} chunks",
+            "message": f"Models loaded · {len(job.segments)}/{job.chunks} chunks",
             "jobId": job.id,
         }
     inner_log = job.inference_output / "_logs" / "evoke_ui.log"
@@ -639,14 +639,14 @@ def _runtime_state() -> dict[str, str | None]:
     except OSError:
         tail = ""
     if "===== pipe inference" in tail:
-        return {"phase": "generating", "message": "模型已加载 · 正在生成", "jobId": job.id}
+        return {"phase": "generating", "message": "Models loaded · Generating", "jobId": job.id}
     if worker_phase == "loading":
-        return {"phase": "loading", "message": worker_message or "正在预加载模型到 GPU", "jobId": job.id}
+        return {"phase": "loading", "message": worker_message or "Preloading models onto the GPU", "jobId": job.id}
     if worker_phase == "running":
-        return {"phase": "generating", "message": worker_message or "常驻模型正在生成", "jobId": job.id}
+        return {"phase": "generating", "message": worker_message or "Model service is generating", "jobId": job.id}
     if worker_phase == "error":
-        return {"phase": "error", "message": worker_message or "常驻模型服务异常", "jobId": job.id}
-    return {"phase": "queued", "message": "模型已常驻 · 正在提交任务", "jobId": job.id}
+        return {"phase": "error", "message": worker_message or "Model service error", "jobId": job.id}
+    return {"phase": "queued", "message": "Models loaded · Submitting task", "jobId": job.id}
 
 
 def _safe_suffix(upload: UploadFile) -> str:
@@ -864,7 +864,7 @@ async def index() -> HTMLResponse:
 async def health() -> dict:
     if CONTROL_ONLY:
         return {"ready": False, "environmentReady": False, "controlOnly": True,
-                "runtime": {"phase": "offline", "message": "实时控制服务运行中；此实例未启动 GPU 模型"}}
+                "runtime": {"phase": "offline", "message": "Live controls are running. GPU models are not loaded on this instance."}}
     checks = _weights_state()
     gpu = _gpu_state()
     runtime = _runtime_state()
@@ -905,7 +905,7 @@ async def default_reference() -> FileResponse:
 @app.post("/api/jobs")
 async def create_job(reference: UploadFile = File(...), spec: str = Form(...)) -> dict:
     if CONTROL_ONLY:
-        raise HTTPException(503, "此实例仅运行实时控制；请在 GPU 环境启动模型服务")
+        raise HTTPException(503, "This instance only runs live controls. Please start the model service in a GPU environment.")
     if not all(_weights_state().values()):
         raise HTTPException(503, "Post-distill, base, or ViGeo weights are incomplete")
     config = _validate_spec(spec)
@@ -1083,7 +1083,7 @@ def _job_pose_paths(job: Job) -> tuple[Path, Path]:
 async def extend_job(job_id: str, payload: dict = Body(...)) -> dict:
 
     if CONTROL_ONLY:
-        raise HTTPException(503, "此实例仅运行实时控制；请在 GPU 环境启动模型服务")
+        raise HTTPException(503, "This instance only runs live controls. Please start the model service in a GPU environment.")
     parent = _get_job(job_id)
     _discover_segments(parent)
     if parent.status != "complete" or len(parent.segments) != parent.chunks:

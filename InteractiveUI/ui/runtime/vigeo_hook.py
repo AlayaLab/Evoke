@@ -129,7 +129,7 @@ def install() -> None:
         self._evoke_offload_text_encoder = True
         self.text_encoder.to("cpu")
         torch.cuda.empty_cache()
-        _write_state("正在预加载 ViGeo 权重到 GPU")
+        _write_state("Preloading ViGeo weights onto the GPU")
         estimator = ensure_estimator(device)
         load_started = time.perf_counter()
         estimator._lazy()
@@ -140,7 +140,7 @@ def install() -> None:
         torch.cuda.synchronize(device)
         load_seconds = time.perf_counter() - load_started
 
-        _write_state("正在执行 ViGeo CUDA warmup")
+        _write_state("Warming up ViGeo on CUDA")
         warmup_started = time.perf_counter()
         with torch.inference_mode():
             warmup = estimator._infer_window(np.zeros((1, 384, 640, 3), dtype=np.float32))
@@ -151,7 +151,7 @@ def install() -> None:
         torch.cuda.empty_cache()
         self._evoke_ui_vigeo_warmed = True
         _write_state(
-            "ViGeo 已预加载并完成 CUDA warmup",
+            "ViGeo loaded and CUDA warmup complete",
             ready=True,
             timings={"loadSeconds": round(load_seconds, 3), "warmupSeconds": round(warmup_seconds, 3)},
             weights=str(estimator.weights),

@@ -275,7 +275,7 @@ class LiveRollout:
         if type(revision) is not int or revision<=self.prompt_attempted:return None
         self.prompt_attempted=revision
         if not isinstance(request.get('prompt'),str) or not request['prompt'].strip():
-            self.prompt_failed(request,'新的场景描述不能为空。');return None
+            self.prompt_failed(request,'The new scene description cannot be empty.');return None
         return request
 
     def prompt_applied(self, request, encode_seconds, cached):
@@ -449,7 +449,7 @@ class LiveRollout:
                         if getattr(self,'precision_probe',None) or getattr(self,'precision_trial',None):
                             from .vae_precision_probe import close_probe
                             close_probe(self)
-            self.publish('error' if error else 'stopped', message=str(error) if error else '探索已结束')
+            self.publish('error' if error else 'stopped', message=str(error) if error else 'Exploration ended')
         finally:
             try:
                 if self.artifact_writer is not None:
