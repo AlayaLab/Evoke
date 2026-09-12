@@ -1302,13 +1302,13 @@
     },
     {
       "path": "ui/assets/dragon-example.png",
-      "bytes": 539921,
-      "sha256": "d4517a1fe4617a47062dc6f6d59b0874ca3b55f2e2f1969c9b181027ac28e80c"
+      "bytes": 1570974,
+      "sha256": "3385b947d7266e90358ba4e64888123baf43019665f12616cf74a79a5f235bca"
     },
     {
       "path": "ui/assets/world-explorer-live.png",
-      "bytes": 539921,
-      "sha256": "d4517a1fe4617a47062dc6f6d59b0874ca3b55f2e2f1969c9b181027ac28e80c"
+      "bytes": 1570974,
+      "sha256": "3385b947d7266e90358ba4e64888123baf43019665f12616cf74a79a5f235bca"
     },
     {
       "path": "ui/assets/world-explorer-setup.png",
