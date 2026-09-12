@@ -8,9 +8,9 @@ Scene selection, generation settings, and adjustable movement and camera rotatio
 
 ![EVOKE Interactive UI showing scene selection, generation settings, and camera speed controls](ui/assets/world-explorer-setup.png)
 
-Live exploration with keyboard controls and the prompt event panel:
+Live prompt: **A dragon appeared on the surface of the lake.**
 
-![EVOKE Interactive UI showing a dragon above the lake after a live prompt update](ui/assets/world-explorer-live.png)
+[![A dragon above the lake after a live prompt update](ui/assets/dragon-example.png)](ui/assets/world-explorer-live.png)
 
 ## Features
 

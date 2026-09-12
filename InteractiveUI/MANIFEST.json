@@ -17,8 +17,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4403,
-      "sha256": "21fc2532c256f6d8142dd7b441eaea78286cb70cff4c637d67833a8d997352c1"
+      "bytes": 4401,
+      "sha256": "cc0571816662d10f9aaf5c35730e7f4088617c4ed699e3332c7ed46ef5fbe499"
     },
     {
       "path": "RELEASE_NOTE.md",
@@ -1299,6 +1299,11 @@
       "path": "ui/app.py",
       "bytes": 60344,
       "sha256": "8d4ae5c5b3ef43e95a3a322d5b7fdee0594a7be557ed01123a6d0179eea6d3f6"
+    },
+    {
+      "path": "ui/assets/dragon-example.png",
+      "bytes": 363130,
+      "sha256": "a610a03bd8bda22607e8afb7feafc04fc83aaa6ea23edc0f81587a0af0b28628"
     },
     {
       "path": "ui/assets/world-explorer-live.png",
