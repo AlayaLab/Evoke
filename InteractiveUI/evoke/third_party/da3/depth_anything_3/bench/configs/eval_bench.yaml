@@ -1,0 +1,64 @@
+model:
+  path: depth-anything/DA3-GIANT
+workspace:
+  work_dir: ./workspace/evaluation
+eval:
+  datasets:
+  - eth3d
+  - 7scenes
+  - scannetpp
+  - hiroom
+  - dtu
+  - dtu64
+  modes:
+  - pose
+  - recon_unposed
+  - recon_posed
+  ref_view_strategy: first
+  scenes: null
+  max_frames: 100
+  eval_only: false
+  print_only: false
+inference:
+  num_fusion_workers: 4
+  debug: false
+presets:
+  full_eval:
+    datasets:
+    - eth3d
+    - 7scenes
+    - scannetpp
+    - hiroom
+    - dtu
+    - dtu64
+    modes:
+    - pose
+    - recon_unposed
+    - recon_posed
+  pose_only:
+    datasets:
+    - eth3d
+    - 7scenes
+    - scannetpp
+    - hiroom
+    - dtu64
+    modes:
+    - pose
+  recon_only:
+    datasets:
+    - eth3d
+    - 7scenes
+    - scannetpp
+    - hiroom
+    - dtu
+    modes:
+    - recon_unposed
+    - recon_posed
+  quick_test:
+    datasets:
+    - eth3d
+    modes:
+    - pose
+    - recon_unposed
+    scenes:
+    - courtyard

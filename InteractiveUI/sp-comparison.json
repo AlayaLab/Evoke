@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-12",
+  "videoSecondsPerChunk": 1.5,
+  "framesPerChunk": 36,
+  "resolution": [
+    640,
+    384
+  ],
+  "precision": "FP32 VAE; original BF16 DiT",
+  "denoisingSteps": 3,
+  "sp4": {
+    "samples": 100,
+    "ditSeconds": {
+      "n": 100,
+      "mean": 0.6446298861503601,
+      "p50": 0.6508880853652954,
+      "p95": 0.7225427627563477,
+      "max": 0.7267739772796631
+    },
+    "chunkSeconds": {
+      "n": 100,
+      "mean": 1.3403229308128357,
+      "p50": 1.240943431854248,
+      "p95": 1.7785923480987549,
+      "max": 1.8205134868621826
+    },
+    "computeGpus": 5
+  },
+  "sp2": {
+    "samples": 36,
+    "ditSeconds": {
+      "n": 36,
+      "mean": 1.2159763243463304,
+      "p50": 1.2539632320404053,
+      "p95": 1.3149468898773193,
+      "max": 1.3932406902313232
+    },
+    "chunkSeconds": {
+      "n": 36,
+      "mean": 1.882189499007331,
+      "p50": 1.8075273036956787,
+      "p95": 2.333339214324951,
+      "max": 2.470632314682007
+    },
+    "computeGpus": 3,
+    "ditDevices": [
+      0,
+      1
+    ],
+    "auxiliaryDevices": [
+      4
+    ],
+    "visibleDevices": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "rebufferCount": 35,
+    "displayedFrames": 1296
+  },
+  "notes": [
+    "Separate closed-loop runs with different history lengths; not a paired numerical-equivalence or precision-quality audit.",
+    "SP2 means two GPUs for DiT only; geometry and VAE encoding still use a separate GPU.",
+    "The SP2 test retains a five-device visible mask, so it does not certify deployment on a physical three-GPU machine.",
+    "The release launcher retains the four-GPU DiT configuration."
+  ]
+}

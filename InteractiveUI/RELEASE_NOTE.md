@@ -1,0 +1,1 @@
+Introduced an interactive world-exploration UI with live prompt switching, adjustable camera controls, and optimized inference that generates 1.5-second video chunks in 1.34 seconds on average using five H200 GPUs.

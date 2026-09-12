@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101211">
+  <title>EVOKE · 世界探索</title>
+  <link rel="stylesheet" href="../static/player.css?v=20260912-sidebar-speed-v1">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="../" aria-label="Evoke 首页"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M16 3 29 10.5 16 18 3 10.5Z M3 17l13 7.5L29 17 M3 23l13 7.5L29 23"/></svg><span>EVOKE</span><small>WORLD EXPLORER</small></a>
+  <div class="header-actions"><span id="modelStatus" class="service-status" data-state="loading" role="status">正在连接</span><a class="director-link" href="../">创作台 <span aria-hidden="true">↗</span></a></div>
+</header>
+<main>
+  <div class="page-heading"><div><p class="eyebrow">A WORLD IN MOTION</p><h1>让世界，继续发生。</h1></div><p class="page-caption">选择起点，自由探索。<br>用一句描述，改变接下来的故事。</p></div>
+  <div class="layout">
+    <section class="play-area" aria-label="探索画面与控制">
+      <div class="stage">
+        <div class="view-heading"><span><i class="live-dot" aria-hidden="true"></i>世界预览</span><span class="view-caption">自由视角 · 连续播放</span></div>
+        <div id="viewport" tabindex="0" aria-label="探索画面：WASD移动，IJKL转动视角，Escape暂停">
+          <img id="world" src="../api/default-case/reference" alt="探索世界的起始画面">
+          <canvas id="playback" width="640" height="384" hidden aria-label="连续播放的探索画面"></canvas>
+          <div class="top-hud"><span id="phase" class="badge">起始画面</span><span id="connection">未进入</span></div>
+          <div class="crosshair" aria-hidden="true"></div>
+          <div id="overlay"><strong>世界，从这里开始</strong><span>选择右侧起点，开启探索</span></div>
+          <div class="bottom-hud"><span id="inputStatus">准备好后，点击“进入世界”</span><span id="latency">—</span></div>
+        </div>
+        <div class="toolbar">
+          <div class="world-clock"><span class="metric-label">探索时间</span><b id="worldTime">0.0 秒</b></div>
+          <div class="world-position"><span class="metric-label">当前位置</span><b id="position">X 0.0 / Z 0.0</b></div>
+          <div class="actions"><button id="pause" disabled>暂停</button><button id="fullscreen" title="全屏查看画面">全屏 ↗</button><button id="stop" class="stop-button" disabled>结束探索</button></div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="control-group"><div class="control-heading"><h3>移动</h3><span>按住前行</span></div><div class="keypad"><button data-key="w" class="top">W<small>前进</small></button><button data-key="a">A<small>左移</small></button><button data-key="s">S<small>后退</small></button><button data-key="d">D<small>右移</small></button></div></div>
+        <div class="control-group"><div class="control-heading"><h3>视角</h3><span>环顾四周</span></div><div class="keypad"><button data-key="i" class="top">I<small>抬头</small></button><button data-key="j">J<small>左转</small></button><button data-key="k">K<small>低头</small></button><button data-key="l">L<small>右转</small></button></div></div>
+        <p class="help"><kbd>Esc</kbd> 暂停 <span>·</span> 组合按键移动与转向 <span>·</span> 也可按住屏幕按钮操作</p>
+      </div>
+    </section>
+    <aside class="inspector" aria-label="场景与事件">
+      <div class="panel-tabs" role="tablist" aria-label="探索设置"><button id="tabSetup" role="tab" aria-selected="true" aria-controls="setup">场景设置</button><button id="tabEvents" role="tab" aria-selected="false" aria-controls="eventPanel" tabindex="-1">实时事件<span class="tab-dot" aria-hidden="true"></span></button></div>
+      <section id="setup" class="inspector-panel" role="tabpanel" aria-labelledby="tabSetup">
+        <div class="panel-heading"><h2>选择你的起点</h2><p>一幅画面，一个即将展开的世界。</p></div>
+        <div class="reference-heading"><span>起始画面</span><span id="selectedReference">山间湖泊</span></div>
+        <div id="referenceList" class="reference-list" aria-label="可选参考图"></div>
+        <label class="upload-label"><span>＋ 使用自己的图片</span><input id="reference" type="file" accept="image/png,image/jpeg,image/webp" aria-label="上传参考图"></label>
+        <label for="prompt" class="field-label">场景描述 <span>初始 Prompt</span></label><textarea id="prompt" rows="4" placeholder="描述你要探索的世界"></textarea>
+        <div class="generation-options"><div><label for="vaePrecision" class="field-label precision-label">生成精度</label><select id="vaePrecision" aria-describedby="precisionHint"><option value="fp32" selected>FP32 · 默认精度</option><option value="fp16_mixed">FP16 混合精度 · 更快</option></select></div><div><label for="warmupChunks" class="field-label precision-label">隐藏预热</label><select id="warmupChunks"><option value="0">不预热</option><option value="1">1 段</option><option value="2">2 段</option><option value="3" selected>3 段</option><option value="4">4 段</option><option value="5">5 段</option><option value="6">6 段</option></select></div></div>
+        <p id="precisionHint" class="note">混合精度可加快生成，长程场景可能与默认精度不同。</p>
+        <div class="sliders camera-settings"><label>移动速度 <output id="speedValue">0.5</output><input id="speed" type="range" min="0.5" max="6" step="0.5" value="0.5"></label><label>转向速度 <output id="lookValue">15°/s</output><input id="lookSpeed" type="range" min="10" max="60" step="5" value="15"></label></div>
+        <input id="quality" type="hidden" value="quality"><button id="start" class="primary" disabled>进入世界 <span aria-hidden="true">↗</span></button>
+        <p class="buffer-note"><i aria-hidden="true"></i>预热不播放；播放当前段时生成下一段。</p><p id="sceneHint" class="note">进入后按 WASD 移动，IJKL 转动视角。</p>
+      </section>
+      <section id="eventPanel" class="inspector-panel live-prompt" role="tabpanel" aria-labelledby="tabEvents" hidden>
+        <div class="panel-heading"><span class="event-icon" aria-hidden="true">✳</span><h2 id="eventHeading">接下来，会发生什么？</h2><p>给正在展开的世界，加入一点变化。</p></div>
+        <label for="eventPrompt" class="field-label">新的事件描述</label><textarea id="eventPrompt" rows="6" maxlength="2000" placeholder="例如：湖面上空绽放红色烟花，水中映出明亮的倒影。" disabled aria-describedby="eventHint eventStatus"></textarea>
+        <div class="event-actions"><label for="eventMode" class="field-label">描述方式<select id="eventMode" disabled><option value="event" selected>保留起始场景，切换事件</option><option value="replace">替换完整描述</option></select></label><button id="submitPrompt" class="primary" disabled>提交事件 →</button></div>
+        <p id="eventStatus" role="status" aria-live="polite">进入世界后可提交实时事件。</p>
+        <div class="event-explainer"><span class="eyebrow">让变化自然发生</span><p id="eventHint">新描述用于后续画面，已准备的片段会继续播放。保留场景时，新事件替换上一次事件；暂停时也可提交，恢复后采用。</p></div>
+      </section>
+    </aside>
+  </div>
+  <footer class="page-footer"><span>EVOKE <span class="footer-divider">/</span> 每一步，都是新的画面。</span><span>WASD 移动 <span class="footer-divider">/</span> IJKL 视角</span></footer>
+  <p id="notice" role="status" aria-live="polite"></p>
+</main>
+<script type="module" src="../static/player.js?v=20260912-sidebar-speed-v1"></script>
+</body>
+</html>

@@ -1,0 +1,1054 @@
+evoke/third_party/vigeo/vigeo/camera_head.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/vigeo/vigeo/layers/prior_dinov2.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/patch_embed.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/dinov2.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/drop_path.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/block.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/attention.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/layer_scale.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/mlp.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/rope.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/vigeo/vigeo/layers/swiglu_ffn.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/videoalign/data.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/prompt_template.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/trainer.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/__init__.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/utils.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/inference.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/vision_process.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/videoalign/train_reward.py
+Copyright (c) 2025 Kling Team, Kuaishou Technology.
+Licensed under the MIT License; see LICENSE in this directory.
+
+evoke/third_party/pi3/models/dinov2/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/utils.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/param_groups.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/cluster.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/config.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/utils/dtype.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/models/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/models/vision_transformer.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/hub/backbones.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/hub/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/hub/utils.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/patch_embed.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/drop_path.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/block.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/dino_head.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/attention.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/layer_scale.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/mlp.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/dinov2/layers/swiglu_ffn.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/layers/block.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/layers/attention.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/pi3/models/layers/pos_embed.py
+Copyright (C) 2022-present Naver Corporation. All rights reserved.
+Licensed under CC BY-NC-SA 4.0 (non-commercial use only).
+
+evoke/third_party/pi3/models/layers/prope.py
+MIT License
+Copyright (c) Authors of
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+The above copyright notice and this permission notice shall be included in all
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+evoke/third_party/da3/depth_anything_3/cli.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/cfg.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/api.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/specs.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/registry.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/registries.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/evaluator.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/print_metrics.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/dataset.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/hiroom.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/dtu.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/sevenscenes.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/scannetpp.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/eth3d.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/bench/datasets/dtu64.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/model_loading.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/sh_helpers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/parallel_utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/pose_align.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/visualize.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/read_write_model.py
+Copyright (c), ETH Zurich and UNC Chapel Hill.
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+All rights reserved.
+* Redistributions of source code must retain the above copyright
+* Redistributions in binary form must reproduce the above copyright
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+
+evoke/third_party/da3/depth_anything_3/utils/pca_utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/ray_utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/gsply_helpers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/constants.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/geometry.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/alignment.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/registry.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/layout_helpers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/camera_trj_helpers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/logger.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/io/input_processor.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/io/output_processor.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/gs.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/depth_vis.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/npz.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/colmap.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/feat_vis.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/utils/export/glb.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/cam_enc.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/dualdpt.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/da3.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/reference_view_selector.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/gs_adapter.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/gsdpt.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/cam_dec.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/dpt.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/utils/gs_renderer.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/utils/head_utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/utils/block.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/utils/attention.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/utils/transform.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/dinov2.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/vision_transformer.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/patch_embed.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/drop_path.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/__init__.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/block.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/attention.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/layer_scale.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/mlp.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/rope.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+This source code is licensed under the Apache License, Version 2.0
+found in the LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/model/dinov2/layers/swiglu_ffn.py
+Copyright (c) Meta Platforms, Inc. and affiliates.
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+
+evoke/third_party/da3/depth_anything_3/services/inference_service.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/services/gallery.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/services/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/services/backend.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/services/input_handlers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/gradio_app.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/css_and_html.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/model_inference.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/__init__.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/file_handlers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/utils.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/visualization.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/ui_components.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/third_party/da3/depth_anything_3/app/modules/event_handlers.py
+Copyright (c) 2025 ByteDance Ltd. and/or its affiliates
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/diffusers_version/transformer_evoke_diffusers.py
+Copyright 2025 The Helios Team and The HuggingFace Team. All rights reserved.
+Copyright 2026 The Evoke Team. All rights reserved. (modifications)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/diffusers_version/scheduling_evoke_diffusers.py
+Copyright 2025 The Helios Team and The HuggingFace Team. All rights reserved.
+Copyright 2026 The Evoke Team. All rights reserved. (modifications)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/modules/transformer_evoke.py
+Copyright 2025 The Helios Team and The HuggingFace Team. All rights reserved.
+Copyright 2026 The Evoke Team. All rights reserved. (modifications)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/pipelines/pipeline_evoke.py
+Copyright 2025 The Helios Team and The HuggingFace Team. All rights reserved.
+Copyright 2026 The Evoke Team. All rights reserved. (modifications)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.
+
+evoke/pipelines/pipeline_evoke_ode.py
+Copyright 2025 The Helios Team and The HuggingFace Team. All rights reserved.
+Copyright 2026 The Evoke Team. All rights reserved. (modifications)
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+distributed under the License is distributed on an "AS IS" BASIS,
+See the License for the specific language governing permissions and
+limitations under the License.

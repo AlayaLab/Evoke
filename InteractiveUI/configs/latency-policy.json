@@ -1,0 +1,9 @@
+{
+  "fusedQkv": false,
+  "verifyFusedQkv": false,
+  "profileEvery": 0,
+  "profileEpoch": "release",
+  "hoistTimestepCast": true,
+  "verifyTimestepCast": false,
+  "benchmarkTimestepCast": false
+}

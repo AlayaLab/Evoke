@@ -1,0 +1,9 @@
+.runtime/
+logs/
+output_evoke/
+__pycache__/
+*.pyc
+models/evoke-base/
+models/evoke/
+models/ViGeo1.1/
+models/DA3/

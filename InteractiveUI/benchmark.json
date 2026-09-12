@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-12",
+  "precision": "FP32 VAE; original BF16 DiT",
+  "computeGpus": 5,
+  "ditSpGpus": 4,
+  "auxiliaryGpus": 1,
+  "gpuModel": "NVIDIA H200",
+  "resolution": [
+    640,
+    384
+  ],
+  "framesPerChunk": 36,
+  "framesPerSecond": 24,
+  "videoSecondsPerChunk": 1.5,
+  "denoisingSteps": 3,
+  "movementSpeed": 0.5,
+  "turnSpeedDegreesPerSecond": 15,
+  "hiddenWarmupChunks": 3,
+  "excludedVisibleStartupChunks": 2,
+  "samples": 100,
+  "chunkGenerationSeconds": {
+    "n": 100,
+    "mean": 1.3403229308128357,
+    "p50": 1.240943431854248,
+    "p95": 1.7785923480987549,
+    "max": 1.8205134868621826
+  },
+  "ditDenoisingSeconds": {
+    "n": 100,
+    "mean": 0.6446298861503601,
+    "p50": 0.6508880853652954,
+    "p95": 0.7225427627563477,
+    "max": 0.7267739772796631
+  },
+  "vaeDecodeSeconds": {
+    "n": 100,
+    "mean": 0.5149180876159668,
+    "p50": 0.514858829498291,
+    "p95": 0.5182280311584473,
+    "max": 0.5225753326416016
+  },
+  "backgroundPreparationSeconds": {
+    "n": 82,
+    "mean": 1.19198171339259,
+    "p50": 1.1867332014953718,
+    "p95": 1.2695150240324438,
+    "max": 1.2955599040724337
+  },
+  "warpSeconds": {
+    "n": 82,
+    "mean": 0.3536595743342598,
+    "p50": 0.34040628792718053,
+    "p95": 0.42232612101361156,
+    "max": 0.4464678189251572
+  },
+  "vaeEncodeSeconds": {
+    "n": 82,
+    "mean": 0.28507293366222847,
+    "p50": 0.2850376739501953,
+    "p95": 0.2860346069335937,
+    "max": 0.286619140625
+  },
+  "shownFrames": 3605,
+  "rebufferCount": 0,
+  "maxDisplayGapExcludingPauseMs": 250,
+  "inputToDisplayMs": {
+    "n": 35,
+    "mean": 2731.962857339043,
+    "p50": 2877.7000007629395,
+    "p95": 3143.4000000000015,
+    "max": 3143.4999992370576
+  },
+  "measurementScope": "Real browser through local proxy; complete generated-window timing excludes initial setup and generation-admission waiting. Foreground and background overlap.",
+  "allocatedGpusDuringMeasurement": 8,
+  "postRestoreSmoke": {
+    "samples": 6,
+    "chunkGenerationSeconds": {
+      "n": 6,
+      "mean": 1.3447995980580647,
+      "p50": 1.237687587738037,
+      "p95": 1.9348247051239014,
+      "max": 1.9348247051239014
+    },
+    "shownFrames": 216,
+    "rebufferCount": 1
+  }
+}

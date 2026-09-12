@@ -1,0 +1,67 @@
+{
+  "mode": "prefetch",
+  "warpGpus": [
+    4
+  ],
+  "encodeGpu": 4,
+  "verifyWarp": false,
+  "verifyEncode": false,
+  "verifyDecode": false,
+  "warpOptimizationBenchmark": false,
+  "latencyProfile": false,
+  "reuseFirstEncode": true,
+  "encodeGraph": true,
+  "decodeGraph": false,
+  "warpOptimizations": {
+    "reuseTargetInverse": true,
+    "staticSplat": true,
+    "deviceFusionGate": false,
+    "reuseSourceIndex": false,
+    "benchmarkReuseSourceIndex": false,
+    "fusedSourceSampling": true,
+    "reuseFullSourceRows": true,
+    "benchmarkSourceSampling": false,
+    "fusedCovis": true,
+    "benchmarkFusedCovis": false
+  },
+  "vigeoOptimizations": {
+    "skipUnusedHeads": true,
+    "verify": false,
+    "profile": false,
+    "epoch": "release",
+    "deferScores": true,
+    "deferScoresVerify": false,
+    "deferScoresBenchmark": false
+  },
+  "vaeDecodeOptimizations": {
+    "skipZeroPad": true,
+    "fuseCausalInput": true,
+    "fuseAffine": true,
+    "fuseNormDivision": true,
+    "memoryBlockSize": 1024,
+    "verify": false,
+    "profile": false,
+    "benchmark": false,
+    "groupProbe": false,
+    "fuseCacheWrites": false,
+    "fuseJointCache": true,
+    "jointCachePlanes": true,
+    "jointCacheBlockSize": 1024
+  },
+  "vaeEncodeOptimizations": {
+    "skipZeroPad": true,
+    "fuseCausalInput": true,
+    "fuseAffine": true,
+    "fuseNormDivision": true,
+    "memoryBlockSize": 1024,
+    "benchmark": false,
+    "fuseJointCache": true,
+    "jointCachePlanes": true,
+    "jointCacheBlockSize": 1024
+  },
+  "asyncMetadata": true,
+  "reuseJpegBuffer": false,
+  "benchmarkJpegBuffer": false,
+  "asyncArtifacts": true,
+  "playbackLeadFrames": 84
+}
