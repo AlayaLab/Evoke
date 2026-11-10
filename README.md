@@ -10,7 +10,8 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="examples/logo/alaya-lab-horizontal-light.svg">
     <img src="examples/logo/alaya-lab-horizontal-dark.svg" width="152" alt="Alaya Lab">
-  </picture>
+  </picture>&nbsp;&nbsp;&nbsp;
+  <img src="examples/logo/sii-horizontal.svg" height="28" alt="Shanghai Innovation Institute">
 </p>
 
 <p align="center">
